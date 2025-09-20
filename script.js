@@ -1,320 +1,13 @@
 document.addEventListener('DOMContentLoaded', () => {
     // Initial static data (will be moved to localStorage if not present)
-    const initialCoursesData = { 
-        '1': { 
-            'أعمال دولية': { 
-                '1': ['مبادئ المحاسبة المالية', 'مبادئ الاقتصاد', 'مبادئ القانون', 'لغة أجنبية (1)', 'مبادئ إدارة الأعمال', 'أساسيات الحاسب'], 
-                '2': ['محاسبة شركات', 'اقتصاديات التجارة الدولية', 'قانون دولي', 'لغة أجنبية (2)', 'إدارة الموارد البشرية', 'مبادئ التسويق'] 
-            }, 
-            'نظم معلومات': { 
-                '1': ['طرق ومهارات الاتصال', 'رياضيات الأعمال', 'حقوق الإنسان', 'التفكير الابتكاري', 'السلوك التنظيمي', 'أساسيات الحاسب'], 
-                '2': ['مقدمة في نظم المعلومات', 'أساسيات البرمجة', 'رياضيات متقدمة', 'إدارة قواعد البيانات', 'مبادئ الإحصاء', 'لغة إنجليزية فنية'] 
-            } 
-        }, 
-        '2': { 
-            'أعمال دولية': { 
-                '1': ['إدارة اللوجستيات وسلاسل الإمداد', 'مبادئ التسويق', 'اقتصاد جزئي', 'محاسبة التكاليف', 'قانون الأعمال'], 
-                '2': ['إدارة مالية', 'التسويق الدولي', 'اقتصاد كلي', 'محاسبة إدارية', 'نظم معلومات إدارية'] 
-            }, 
-            'نظم معلومات': { 
-                '1': ['قانون الأعمال', 'قواعد البيانات (1)', 'إدارة الإنتاج', 'محاسبة شركات', 'تصميم برامج الحاسب'], 
-                '2': ['شبكات الحاسب (1)', 'تحليل وتصميم النظم', 'هياكل البيانات', 'بحوث العمليات', 'تطبيقات الإنترنت'] 
-            } 
-        }
-    };
+    const initialCoursesData = { '1': { 'أعمال دولية': { '1': ['مبادئ المحاسبة المالية', 'مبادئ الاقتصاد', 'مبادئ القانون', 'لغة أجنبية (1)', 'مبادئ إدارة الأعمال', 'أساسيات الحاسب'], '2': ['محاسبة شركات', 'اقتصاديات التجارة الدولية', 'قانون دولي', 'لغة أجنبية (2)', 'إدارة الموارد البشرية', 'مبادئ التسويق'] }, 'نظم معلومات': { '1': ['طرق ومهارات الاتصال', 'رياضيات الأعمال', 'حقوق الإنسان', 'التفكير الابتكاري', 'السلوك التنظيمي', 'أساسيات الحاسب'], '2': ['مقدمة في نظم المعلومات', 'أساسيات البرمجة', 'رياضيات متقدمة', 'إدارة قواعد البيانات', 'مبادئ الإحصاء', 'لغة إنجليزية فنية'] } }, '2': { 'أعمال دولية': { '1': ['إدارة اللوجستيات وسلاسل الإمداد', 'مبادئ التسويق', 'اقتصاد جزئي', 'محاسبة التكاليف', 'قانون الأعمال'], '2': ['إدارة مالية', 'التسويق الدولي', 'اقتصاد كلي', 'محاسبة إدارية', 'نظم معلومات إدارية'] }, 'نظم معلومات': { '1': ['قانون الأعمال', 'قواعد البيانات (1)', 'إدارة الإنتاج', 'محاسبة شركات', 'تصميم برامج الحاسب'], '2': ['شبكات الحاسب (1)', 'تحليل وتصميم النظم', 'هياكل البيانات', 'بحوث العمليات', 'تطبيقات الإنترنت'] } } };
     
-    const videoCoursesData = { 
-        'ecommerce': { 
-            title_ar: 'كورسات التجارة الإلكترونية', 
-            title_en: 'E-commerce Courses', 
-            icon: 'fas fa-cash-register', 
-            videos: [ 
-                { title: 'كورس التجارة الالكترونية الكامل', embed_url: 'https://www.youtube.com/embed/h0unhODkj40' }, 
-                { title: 'دليلك الشامل لتبدأ في التجارة الالكترونية', embed_url: 'https://www.youtube.com/embed/ICFXS5WIS3Y' }, 
-                { title: 'أسرار التجارة الإلكترونية', embed_url: 'https://www.youtube.com/embed/q2f_BVSVeHQ' }, 
-                { title: 'كورس شامل للتجارة الإلكترونية', embed_url: 'https://www.youtube.com/embed/v46BIS_ICiA' } 
-            ] 
-        }, 
-        'graphic-design': { 
-            title_ar: 'كورسات الجرافيك ديزاين', 
-            title_en: 'Graphic Design Courses', 
-            icon: 'fas fa-palette', 
-            videos: [ 
-                { title: 'كورس جرافيك ديزاين كامل', embed_url: 'https://www.youtube.com/embed/va-MZOPrJ0s' }, 
-                { title: 'تعلم الفوتوشوب في فيديو واحد', embed_url: 'https://www.youtube.com/embed/4IJPI0d7STI' }, 
-                { title: 'تعلم اليستريتور في فيديو واحد', embed_url: 'https://www.youtube.com/embed/WlTsKiVwZAM' } 
-            ] 
-        }, 
-        'video-editing': { 
-            title_ar: 'كورسات المونتاج', 
-            title_en: 'Video Editing Courses', 
-            icon: 'fas fa-film', 
-            videos: [ 
-                { title: 'كورس مونتاج كامل ببرنامج واحد', embed_url: 'https://www.youtube.com/embed/qKtUjfolUOM' }, 
-                { title: 'تعلم المونتاج باستخدام أدوبي بريمير', embed_url: 'https://www.youtube.com/embed/8iGvUZKeLeU' } 
-            ] 
-        }, 
-        'data-analysis': { 
-            title_ar: 'كورسات تحليل البيانات', 
-            title_en: 'Data Analysis Courses', 
-            icon: 'fas fa-chart-pie', 
-            videos: [ 
-                { title: 'كورس تحليل البيانات الكامل', embed_url: 'https://www.youtube.com/embed/nXdkuxAj7tg' }, 
-                { title: 'تحليل البيانات باستخدام اكسل', embed_url: 'https://www.youtube.com/embed/z7nN0hZ_PtQ' } 
-            ] 
-        }, 
-        'ai': { 
-            title_ar: 'كورسات الذكاء الاصطناعي', 
-            title_en: 'Artificial Intelligence Courses', 
-            icon: 'fas fa-brain', 
-            videos: [ 
-                { title: 'كورس الذكاء الاصطناعي', embed_url: 'https://www.youtube.com/embed/oDmyhjwAYXk' }, 
-                { title: 'تعلم الذكاء الاصطناعي في 6 ساعات', embed_url: 'https://www.youtube.com/embed/Rp5VnXnWMLk' } 
-            ] 
-        } 
-    };
+    const videoCoursesData = { 'ecommerce': { title_ar: 'كورسات التجارة الإلكترونية', title_en: 'E-commerce Courses', icon: 'fas fa-cash-register', videos: [ { title: 'كورس التجارة الالكترونية الكامل', embed_url: 'https://www.youtube.com/embed/h0unhODkj40' }, { title: 'دليلك الشامل لتبدأ في التجارة الالكترونية', embed_url: 'https://www.youtube.com/embed/ICFXS5WIS3Y' }, { title: 'أسرار التجارة الإلكترونية', embed_url: 'https://www.youtube.com/embed/q2f_BVSVeHQ' }, { title: 'كورس شامل للتجارة الإلكترونية', embed_url: 'https://www.youtube.com/embed/v46BIS_ICiA' } ] }, 'graphic-design': { title_ar: 'كورسات الجرافيك ديزاين', title_en: 'Graphic Design Courses', icon: 'fas fa-palette', videos: [ { title: 'كورس جرافيك ديزاين كامل', embed_url: 'https://www.youtube.com/embed/va-MZOPrJ0s' }, { title: 'تعلم الفوتوشوب في فيديو واحد', embed_url: 'https://www.youtube.com/embed/4IJPI0d7STI' }, { title: 'تعلم اليستريتور في فيديو واحد', embed_url: 'https://www.youtube.com/embed/WlTsKiVwZAM' } ] }, 'video-editing': { title_ar: 'كورسات المونتاج', title_en: 'Video Editing Courses', icon: 'fas fa-film', videos: [ { title: 'كورس مونتاج كامل ببرنامج واحد', embed_url: 'https://www.youtube.com/embed/qKtUjfolUOM' }, { title: 'تعلم المونتاج باستخدام أدوبي بريمير', embed_url: 'https://www.youtube.com/embed/8iGvUZKeLeU' } ] }, 'data-analysis': { title_ar: 'كورسات تحليل البيانات', title_en: 'Data Analysis Courses', icon: 'fas fa-chart-pie', videos: [ { title: 'كورس تحليل البيانات الكامل', embed_url: 'https://www.youtube.com/embed/nXdkuxAj7tg' }, { title: 'تحليل البيانات باستخدام اكسل', embed_url: 'https://www.youtube.com/embed/z7nN0hZ_PtQ' } ] }, 'ai': { title_ar: 'كورسات الذكاء الاصطناعي', title_en: 'Artificial Intelligence Courses', icon: 'fas fa-brain', videos: [ { title: 'كورس الذكاء الاصطناعي', embed_url: 'https://www.youtube.com/embed/oDmyhjwAYXk' }, { title: 'تعلم الذكاء الاصطناعي في 6 ساعات', embed_url: 'https://www.youtube.com/embed/Rp5VnXnWMLk' } ] } };
     
-    const initialAiTools = [ 
-        {id: 1, name: "ChatGPT", url: "https://chatgpt.com/"}, 
-        {id: 2, name: "Gemini", url: "https://gemini.google.com/"}, 
-        {id: 3, name: "Perplexity (بحث)", url: "https://www.perplexity.ai/"}, 
-        {id: 4, name: "Claude", url: "https://claude.ai/"}, 
-        {id: 5, name: "Grammarly (كتابة)", url: "https://www.grammarly.com/"}, 
-        {id: 6, name: "QuillBot (إعادة صياغة)", url: "https://quillbot.com/"}, 
-        {id: 7, name: "WolframAlpha (حسابات)", url: "https://www.wolframalpha.com/"}, 
-        {id: 8, name: "ChatPDF", url: "https://www.chatpdf.com/"}, 
-        {id: 9, name: "Socratic (حلول)", url: "https://socratic.org/"}, 
-        {id: 10, name: "Consensus (أبحاث)", url: "https://consensus.app/"}, 
-        {id: 11, name: "Elicit (أبحاث)", url: "https://elicit.org/"}, 
-        {id: 12, name: "TutorAI (مُعلم ذكي)", url: "https://www.tutorai.me/"}, 
-        {id: 13, name: "MyBib (توثيق)", url: "https://www.mybib.com/"}, 
-        {id: 14, name: "Notion AI (تنظيم)", url: "https://www.notion.so/product/ai"}, 
-        {id: 15, name: "Meta AI", url: "https://www.meta.ai/"}, 
-        {id: 16, name: "SciSpace (أوراق علمية)", url: "https://typeset.io/"} 
-    ];
+    const initialAiTools = [ {id: 1, name: "ChatGPT", url: "https://chatgpt.com/"}, {id: 2, name: "Gemini", url: "https://gemini.google.com/"}, {id: 3, name: "Perplexity (بحث)", url: "https://www.perplexity.ai/"}, {id: 4, name: "Claude", url: "https://claude.ai/"}, {id: 5, name: "Grammarly (كتابة)", url: "https://www.grammarly.com/"}, {id: 6, name: "QuillBot (إعادة صياغة)", url: "https://quillbot.com/"}, {id: 7, name: "WolframAlpha (حسابات)", url: "https://www.wolframalpha.com/"}, {id: 8, name: "ChatPDF", url: "https://www.chatpdf.com/"}, {id: 9, name: "Socratic (حلول)", url: "https://socratic.org/"}, {id: 10, name: "Consensus (أبحاث)", url: "https://consensus.app/"}, {id: 11, name: "Elicit (أبحاث)", url: "https://elicit.org/"}, {id: 12, name: "TutorAI (مُعلم ذكي)", url: "https://www.tutorai.me/"}, {id: 13, name: "MyBib (توثيق)", url: "https://www.mybib.com/"}, {id: 14, name: "Notion AI (تنظيم)", url: "https://www.notion.so/product/ai"}, {id: 15, name: "Meta AI", url: "https://www.meta.ai/"}, {id: 16, name: "SciSpace (أوراق علمية)", url: "https://typeset.io/"} ];
     const translations = { 
-        ar: { 
-            login_choice_btn: "تسجيل الدخول", 
-            create_account_btn: "إنشاء حساب", 
-            create_account_title: "إنشاء حساب جديد", 
-            register_btn: "سجل الآن", 
-            login_title_main: "تسجيل الدخول", 
-            login_btn_main: "دخول", 
-            name_placeholder: "الاسم", 
-            password_label: "كلمة السر", 
-            password_format_hint: "يجب أن لا تقل عن 8 حروف وتحتوي على أحرف وأرقام.", 
-            password_forgot_hint: "يجب عليك عدم نسيان كلمه السر", 
-            year_placeholder: "الفرقة", 
-            year_1: "الأولى", 
-            year_2: "الثانية", 
-            major_placeholder: "اختر الفرقة أولاً...", 
-            major_label: "الشعبة", 
-            major_option_1: "أعمال دولية", 
-            major_option_2: "نظم معلومات", 
-            semester_label: "الفصل الدراسي", 
-            semester_1: "الفصل الدراسي الأول", 
-            semester_2: "الفصل الدراسي الثاني", 
-            semester_warning_text: "سيتم فتح هذا الفصل في الميعاد المحدد له", 
-            welcome_back: "مرحباً يـ ", 
-            nav_pdf: "كتب", 
-            nav_sections: "السكاشن", 
-            nav_ai: "AI", 
-            nav_platform: "المنصة", 
-            nav_settings: "الإعدادات", 
-            nav_about: "عنا", 
-            nav_courses: "كورسات", 
-            nav_meetings: "ميتنج", 
-            meetings_locked_main: "قسم الميتنج مغلق حالياً من قبل الإدارة.", 
-            meetings_locked_sub: "سيتم تفعيله عند وجود جلسات مباشرة.", 
-            close_btn: "إغلاق", 
-            settings_title: "الإعدادات", 
-            settings_lang: "اللغة", 
-            settings_theme: "الثيم اللوني", 
-            settings_mode: "الوضع", 
-            mode_dark: "داكن", 
-            mode_light: "فاتح", 
-            mode_oled: "ليلي", 
-            mode_gold_black: "ذهبي", 
-            about_title: "Mora for Studying", 
-            about_desc: "خاص بالمعهد العالي للحاسبات والمعلومات بطنطا", 
-            app_version: "الاصدار 11.0", 
-            about_dev: "تم التطوير بواسطه Amr lotfy.", 
-            sponsors_title: "تحت رعاية", 
-            ai_title: "اختر مساعدك الذكي", 
-            platform_title: "روابط المنصة التعليمية", 
-            redirect_dev: "تطوير: Amr Lotfy", 
-            redirect_msg: "...جاري تحويلك الآن", 
-            fill_all_fields: "الرجاء ملء جميع الحقول", 
-            password_error_length: "كلمة السر يجب أن تكون 8 أحرف على الأقل", 
-            password_error_format: "كلمة السر يجب أن تحتوي على أحرف وأرقام", 
-            lecture: "المحاضرة", 
-            section: "سيكشن", 
-            pdf: "ملف", 
-            privacy_policy_btn: "سياسة الخصوصية", 
-            privacy_title: "سياسة الخصوصية", 
-            privacy_content: "نحن في Mora for Studying نأخذ خصوصيتك على محمل الجد. البيانات التي يتم جمعها عند التسجيل (مثل الاسم، الفرقة، الشعبة) تُستخدم فقط لتخصيص تجربتك التعليمية وعرض المواد الدراسية المناسبة لك. نحن لا نشارك هذه المعلومات مع أي طرف ثالث. يتم تخزين جميع بيانات حسابك بشكل آمن على جهازك المحلي.", 
-            loading_text: "متنساش تصلي علي النبي", 
-            rate_website_btn: "قيم الموقع", 
-            rating_title: "قيم تجربتك", 
-            rating_thanks: "شكراً لتقييمك!", 
-            blog_btn: "مدونتي", 
-            blog_title: "مدونتي الشخصية", 
-            blog_save_btn: "حفظ", 
-            blog_saved_success: "تم الحفظ!", 
-            timer_btn: "تايمر", 
-            timer_title_pomodoro: "تايمر التركيز", 
-            timer_start_btn: "بدء", 
-            timer_pause_btn: "إيقاف مؤقت", 
-            timer_reset_btn: "إعادة ضبط", 
-            courses_title: "كورسات مقترحة", 
-            courses_locked_msg: "هذا القسم يتطلب <span class='highlight'>__UNLOCK__</span> نقطة للفتح. استمر في حضور المحاضرات لجمع النقاط!", 
-            dev_credit_text: "تطوير: Amr Lotfy", 
-            logout_btn: "تسجيل الخروج", 
-            logout_msg: "جاري تسجيل خروجك...", 
-            locked_lectures_msg: "لم يقم الأدمن بإضافة محتوى لهذه المحاضرة بعد.", 
-            locked_pdfs_msg: "لم يقم الأدمن بإضافة هذا الكتاب بعد.", 
-            locked_sections_msg: "لم يقم الأدمن بإضافة محتوى لهذا السكشن بعد.", 
-            auth_error_no_account: "لا يوجد حسابات مسجلة. يرجى إنشاء حساب أولاً.", 
-            auth_error_user_exists: "هذا الاسم مستخدم بالفعل", 
-            auth_error_wrong_pass: "كلمة المرور غير صحيحة", 
-            auth_error_banned: "تم حظر هذا الحساب.", 
-            captcha_enter_code: "أدخل الرمز", 
-            captcha_error: "الرمز غير صحيح، حاول مرة أخرى.", 
-            clear_data_btn: "محو البيانات", 
-            clear_data_confirm: "هل أنت متأكد من رغبتك في محو جميع البيانات؟ لا يمكن التراجع عن هذا الإجراء.", 
-            pomodoro_mode_work: "جلسة تركيز", 
-            pomodoro_mode_break: "وقت الاستراحة", 
-            pomodoro_cycles: "الجولة:", 
-            pomodoro_desc: "استخدم تقنية بومودورو لتنظيم وقتك وزيادة تركيزك، عبر جلسات عمل واستراحة متناوبة.", 
-            pomodoro_work_done: "أحسنت صنعًا! انتهت جلسة التركيز. شكرًا لالتزامك.", 
-            pomodoro_break_done: "انتهت استراحتك. لنعد إلى التركيز!", 
-            points_info_main: "لكل محاضرة تدخلها مكافأة <span class='highlight'>__POINTS__</span> نقطة، اجمع <span class='highlight'>__UNLOCK__</span> نقطة لفتح قسم الكورسات.", 
-            points_info_dev_credit: "تطوير: Amr Lotfy", 
-            timer_live_text: "جارٍ الآن", 
-            nav_opinions: "آراء الطلاب", 
-            opinions_title: "آراء الطلاب", 
-            opinion_placeholder: "اكتب رأيك هنا...", 
-            opinion_submit_btn: "نشر الرأي", 
-            opinion_success: "تم نشر رأيك بنجاح!", 
-            settings_saved: "تم حفظ الإعدادات بنجاح!", 
-            announcement_sent: "تم إرسال الإعلان بنجاح!", 
-            nav_announcements: "الإعلانات", 
-            nav_site_settings: "إعدادات الموقع", 
-            "nav_text_editor": "إدارة نصوص الموقع", 
-            nav_ratings_admin: "تقييمات الموقع", 
-            nav_ai_tools_admin: "إدارة أدوات AI" 
-        }, 
-        en: { 
-            login_choice_btn: "Log In", 
-            create_account_btn: "Create Account", 
-            create_account_title: "Create New Account", 
-            register_btn: "Register Now", 
-            login_title_main: "Log In", 
-            login_btn_main: "Enter", 
-            name_placeholder: "Name", 
-            password_label: "Password", 
-            password_format_hint: "Must be 8+ characters and contain letters/numbers.", 
-            password_forgot_hint: "You must not forget your password", 
-            year_placeholder: "Year", 
-            year_1: "First", 
-            year_2: "Second", 
-            major_placeholder: "Select year first...", 
-            major_label: "Division", 
-            major_option_1: "International Business", 
-            major_option_2: "Information Systems", 
-            semester_label: "Semester", 
-            semester_1: "First Semester", 
-            semester_2: "Second Semester", 
-            semester_warning_text: "This semester will be opened at its scheduled time", 
-            welcome_back: "Welcome, ", 
-            nav_pdf: "Books", 
-            nav_sections: "Sections", 
-            nav_ai: "AI", 
-            nav_platform: "Platform", 
-            nav_settings: "Settings", 
-            nav_about: "About", 
-            nav_courses: "Courses", 
-            nav_meetings: "Meetings", 
-            meetings_locked_main: "Meetings section is currently disabled by the admin.", 
-            meetings_locked_sub: "It will be activated when live sessions are available.", 
-            close_btn: "Close", 
-            settings_title: "Settings", 
-            settings_lang: "Language", 
-            settings_theme: "Color Theme", 
-            settings_mode: "Mode", 
-            mode_dark: "Dark", 
-            mode_light: "Light", 
-            mode_oled: "OLED", 
-            mode_gold_black: "Gold", 
-            about_title: "Mora for Studying", 
-            about_desc: "Exclusive for the Higher Institute for Computers and Information in Tanta", 
-            app_version: "Version 11.0", 
-            about_dev: "Developed by Amr lotfy.", 
-            sponsors_title: "Under the sponsorship of", 
-            ai_title: "Choose your AI assistant", 
-            platform_title: "Educational Platform Links", 
-            redirect_dev: "Developed by: Amr Lotfy", 
-            redirect_msg: "Redirecting you now...", 
-            fill_all_fields: "Please fill all fields", 
-            password_error_length: "Password must be at least 8 characters long", 
-            password_error_format: "Password must contain letters and numbers", 
-            lecture: "Lecture", 
-            section: "Section", 
-            pdf: "PDF", 
-            privacy_policy_btn: "Privacy Policy", 
-            privacy_title: "Privacy Policy", 
-            privacy_content: "At Mora for Studying, we take your privacy seriously. The data collected upon registration (such as name, year, and division) is used solely to personalize your educational experience and display the appropriate course materials. We do not share this information with any third parties. All your account data is stored securely on your local device.", 
-            loading_text: "Remember to send blessings upon the Prophet", 
-            rate_website_btn: "Rate Website", 
-            rating_title: "Rate Your Experience", 
-            rating_thanks: "Thanks for your feedback!", 
-            blog_btn: "My Blog", 
-            blog_title: "My Personal Blog", 
-            blog_save_btn: "Save", 
-            blog_saved_success: "Saved!", 
-            timer_btn: "Timer", 
-            timer_title_pomodoro: "Focus Timer", 
-            timer_start_btn: "Start", 
-            timer_pause_btn: "Pause", 
-            timer_reset_btn: "Reset", 
-            courses_title: "Suggested Courses", 
-            courses_locked_msg: "This section requires <span class='highlight'>__UNLOCK__</span> points to unlock. Keep attending lectures to earn points!", 
-            dev_credit_text: "Developed by: Amr Lotfy", 
-            logout_btn: "Logout", 
-            logout_msg: "Logging you out...", 
-            locked_lectures_msg: "The admin has not added content for this lecture yet.", 
-            locked_pdfs_msg: "The admin has not added this book yet.", 
-            locked_sections_msg: "The admin has not added content for this section yet.", 
-            auth_error_no_account: "No accounts registered. Please create an account first.", 
-            auth_error_user_exists: "This username is already taken", 
-            auth_error_wrong_pass: "Incorrect password", 
-            auth_error_banned: "This account has been banned.", 
-            captcha_enter_code: "Enter the code", 
-            captcha_error: "Incorrect code, please try again.", 
-            clear_data_btn: "Clear Data", 
-            clear_data_confirm: "Are you sure you want to clear all data? This action cannot be undone.", 
-            pomodoro_mode_work: "Focus Session", 
-            pomodoro_mode_break: "Break Time", 
-            pomodoro_cycles: "Round:", 
-            pomodoro_desc: "Use the Pomodoro Technique to organize your time and increase focus through alternating work and break sessions.", 
-            pomodoro_work_done: "Excellent work! Focus session complete. Thank you for your commitment.", 
-            pomodoro_break_done: "Your break is over. Let's get back to it!", 
-            points_info_main: "Earn <span class='highlight'>__POINTS__</span> points for every lecture you attend. Collect <span class='highlight'>__UNLOCK__</span> points to unlock the Courses section.", 
-            points_info_dev_credit: "Developed by: Amr Lotfy", 
-            timer_live_text: "Live", 
-            nav_opinions: "Opinions", 
-            opinions_title: "Student Opinions", 
-            opinion_placeholder: "Write your opinion here...", 
-            opinion_submit_btn: "Publish Opinion", 
-            opinion_success: "Your opinion has been published!", 
-            settings_saved: "Settings saved successfully!", 
-            announcement_sent: "Announcement sent successfully!", 
-            nav_announcements: "Announcements", 
-            nav_site_settings: "Site Settings", 
-            "nav_text_editor": "Manage Site Text", 
-            nav_ratings_admin: "Website Ratings", 
-            nav_ai_tools_admin: "Manage AI Tools" 
-        } 
+        ar: { login_choice_btn: "تسجيل الدخول", create_account_btn: "إنشاء حساب", create_account_title: "إنشاء حساب جديد", register_btn: "سجل الآن", login_title_main: "تسجيل الدخول", login_btn_main: "دخول", name_placeholder: "الاسم", password_label: "كلمة السر", password_format_hint: "يجب أن لا تقل عن 8 حروف وتحتوي على أحرف وأرقام.", password_forgot_hint: "يجب عليك عدم نسيان كلمه السر", year_placeholder: "الفرقة", year_1: "الأولى", year_2: "الثانية", major_placeholder: "اختر الفرقة أولاً...", major_label: "الشعبة", major_option_1: "أعمال دولية", major_option_2: "نظم معلومات", semester_label: "الفصل الدراسي", semester_1: "الفصل الدراسي الأول", semester_2: "الفصل الدراسي الثاني", semester_warning_text: "سيتم فتح هذا الفصل في الميعاد المحدد له", welcome_back: "مرحباً يـ ", nav_pdf: "كتب", nav_sections: "السكاشن", nav_ai: "AI", nav_platform: "المنصة", nav_settings: "الإعدادات", nav_about: "عنا", nav_courses: "كورسات", nav_meetings: "ميتنج", nav_info: "معلومات", meetings_locked_main: "قسم الميتنج مغلق حالياً من قبل الإدارة.", meetings_locked_sub: "سيتم تفعيله عند وجود جلسات مباشرة.", close_btn: "إغلاق", settings_title: "الإعدادات", settings_lang: "اللغة", settings_theme: "الثيم اللوني", settings_mode: "الوضع", mode_dark: "داكن", mode_light: "فاتح", mode_oled: "ليلي", mode_gold_black: "ذهبي", about_title: "Mora for Studying", about_desc: "خاص بالمعهد العالي للحاسبات والمعلومات بطنطا", app_version: "الاصدار 11.0", about_dev: "تم التطوير بواسطه Amr lotfy.", sponsors_title: "تحت رعاية", ai_title: "اختر مساعدك الذكي", platform_title: "روابط المنصة التعليمية", redirect_dev: "تطوير: Amr Lotfy", redirect_msg: "...جاري تحويلك الآن", fill_all_fields: "الرجاء ملء جميع الحقول", password_error_length: "كلمة السر يجب أن تكون 8 أحرف على الأقل", password_error_format: "كلمة السر يجب أن تحتوي على أحرف وأرقام", lecture: "المحاضرة", section: "سيكشن", pdf: "ملف", privacy_policy_btn: "سياسة الخصوصية", privacy_title: "سياسة الخصوصية", privacy_content: "نحن في Mora for Studying نأخذ خصوصيتك على محمل الجد. البيانات التي يتم جمعها عند التسجيل (مثل الاسم، الفرقة، الشعبة) تُستخدم فقط لتخصيص تجربتك التعليمية وعرض المواد الدراسية المناسبة لك. نحن لا نشارك هذه المعلومات مع أي طرف ثالث. يتم تخزين جميع بيانات حسابك بشكل آمن على جهازك المحلي.", loading_text: "متنساش تصلي علي النبي", rate_website_btn: "قيم الموقع", rating_title: "قيم تجربتك", rating_thanks: "شكراً لتقييمك!", blog_btn: "مدونتي", blog_title: "مدونتي الشخصية", blog_save_btn: "حفظ", blog_saved_success: "تم الحفظ!", timer_btn: "تايمر", timer_title_pomodoro: "تايمر التركيز", timer_start_btn: "بدء", timer_pause_btn: "إيقاف مؤقت", timer_reset_btn: "إعادة ضبط", courses_title: "كورسات مقترحة", courses_locked_msg: "هذا القسم يتطلب <span class='highlight'>__UNLOCK__</span> نقطة للفتح. استمر في حضور المحاضرات لجمع النقاط!", dev_credit_text: "تطوير: Amr Lotfy", logout_btn: "تسجيل الخروج", logout_msg: "جاري تسجيل خروجك...", locked_lectures_msg: "لم يقم الأدمن بإضافة محتوى لهذه المحاضرة بعد.", locked_pdfs_msg: "لم يقم الأدمن بإضافة هذا الكتاب بعد.", locked_sections_msg: "لم يقم الأدمن بإضافة محتوى لهذا السكشن بعد.", auth_error_no_account: "لا يوجد حسابات مسجلة. يرجى إنشاء حساب أولاً.", auth_error_user_exists: "هذا الاسم مستخدم بالفعل", auth_error_wrong_pass: "كلمة المرور غير صحيحة", auth_error_banned: "تم حظر هذا الحساب.", captcha_enter_code: "أدخل الرمز", captcha_error: "الرمز غير صحيح، حاول مرة أخرى.", clear_data_btn: "محو البيانات", clear_data_confirm: "هل أنت متأكد من رغبتك في محو جميع البيانات؟ لا يمكن التراجع عن هذا الإجراء.", pomodoro_mode_work: "جلسة تركيز", pomodoro_mode_break: "وقت الاستراحة", pomodoro_cycles: "الجولة:", pomodoro_desc: "استخدم تقنية بومودورو لتنظيم وقتك وزيادة تركيزك، عبر جلسات عمل واستراحة متناوبة.", pomodoro_work_done: "أحسنت صنعًا! انتهت جلسة التركيز. شكرًا لالتزامك.", pomodoro_break_done: "انتهت استراحتك. لنعد إلى التركيز!", points_info_main: "لكل محاضرة تدخلها مكافأة <span class='highlight'>__POINTS__</span> نقطة، اجمع <span class='highlight'>__UNLOCK__</span> نقطة لفتح قسم الكورسات.", points_info_dev_credit: "تطوير: Amr Lotfy", timer_live_text: "جارٍ الآن", nav_opinions: "آراء الطلاب", opinions_title: "آراء الطلاب", opinion_placeholder: "اكتب رأيك هنا...", opinion_submit_btn: "نشر الرأي", opinion_success: "تم نشر رأيك بنجاح!", settings_saved: "تم حفظ الإعدادات بنجاح!", announcement_sent: "تم إرسال الإعلان بنجاح!", nav_announcements: "الإعلانات", nav_site_settings: "إعدادات الموقع", "nav_text_editor": "إدارة نصوص الموقع", nav_ratings_admin: "تقييمات الموقع", nav_ai_tools_admin: "إدارة أدوات AI" }, 
+        en: { login_choice_btn: "Log In", create_account_btn: "Create Account", create_account_title: "Create New Account", register_btn: "Register Now", login_title_main: "Log In", login_btn_main: "Enter", name_placeholder: "Name", password_label: "Password", password_format_hint: "Must be 8+ characters and contain letters/numbers.", password_forgot_hint: "You must not forget your password", year_placeholder: "Year", year_1: "First", year_2: "Second", major_placeholder: "Select year first...", major_label: "Division", major_option_1: "International Business", major_option_2: "Information Systems", semester_label: "Semester", semester_1: "First Semester", semester_2: "Second Semester", semester_warning_text: "This semester will be opened at its scheduled time", welcome_back: "Welcome, ", nav_pdf: "Books", nav_sections: "Sections", nav_ai: "AI", nav_platform: "Platform", nav_settings: "Settings", nav_about: "About", nav_courses: "Courses", nav_meetings: "Meetings", nav_info: "Info", meetings_locked_main: "Meetings section is currently disabled by the admin.", meetings_locked_sub: "It will be activated when live sessions are available.", close_btn: "Close", settings_title: "Settings", settings_lang: "Language", settings_theme: "Color Theme", settings_mode: "Mode", mode_dark: "Dark", mode_light: "Light", mode_oled: "OLED", mode_gold_black: "Gold", about_title: "Mora for Studying", about_desc: "Exclusive for the Higher Institute for Computers and Information in Tanta", app_version: "Version 11.0", about_dev: "Developed by Amr lotfy.", sponsors_title: "Under the sponsorship of", ai_title: "Choose your AI assistant", platform_title: "Educational Platform Links", redirect_dev: "Developed by: Amr Lotfy", redirect_msg: "Redirecting you now...", fill_all_fields: "Please fill all fields", password_error_length: "Password must be at least 8 characters long", password_error_format: "Password must contain letters and numbers", lecture: "Lecture", section: "Section", pdf: "PDF", privacy_policy_btn: "Privacy Policy", privacy_title: "Privacy Policy", privacy_content: "At Mora for Studying, we take your privacy seriously. The data collected upon registration (such as name, year, and division) is used solely to personalize your educational experience and display the appropriate course materials. We do not share this information with any third parties. All your account data is stored securely on your local device.", loading_text: "Remember to send blessings upon the Prophet", rate_website_btn: "Rate Website", rating_title: "Rate Your Experience", rating_thanks: "Thanks for your feedback!", blog_btn: "My Blog", blog_title: "My Personal Blog", blog_save_btn: "Save", blog_saved_success: "Saved!", timer_btn: "Timer", timer_title_pomodoro: "Focus Timer", timer_start_btn: "Start", timer_pause_btn: "Pause", timer_reset_btn: "Reset", courses_title: "Suggested Courses", courses_locked_msg: "This section requires <span class='highlight'>__UNLOCK__</span> points to unlock. Keep attending lectures to earn points!", dev_credit_text: "Developed by: Amr Lotfy", logout_btn: "Logout", logout_msg: "Logging you out...", locked_lectures_msg: "The admin has not added content for this lecture yet.", locked_pdfs_msg: "The admin has not added this book yet.", locked_sections_msg: "The admin has not added content for this section yet.", auth_error_no_account: "No accounts registered. Please create an account first.", auth_error_user_exists: "This username is already taken", auth_error_wrong_pass: "Incorrect password", auth_error_banned: "This account has been banned.", captcha_enter_code: "Enter the code", captcha_error: "Incorrect code, please try again.", clear_data_btn: "Clear Data", clear_data_confirm: "Are you sure you want to clear all data? This action cannot be undone.", pomodoro_mode_work: "Focus Session", pomodoro_mode_break: "Break Time", pomodoro_cycles: "Round:", pomodoro_desc: "Use the Pomodoro Technique to organize your time and increase focus through alternating work and break sessions.", pomodoro_work_done: "Excellent work! Focus session complete. Thank you for your commitment.", pomodoro_break_done: "Your break is over. Let's get back to it!", points_info_main: "Earn <span class='highlight'>__POINTS__</span> points for every lecture you attend. Collect <span class='highlight'>__UNLOCK__</span> points to unlock the Courses section.", points_info_dev_credit: "Developed by: Amr Lotfy", timer_live_text: "Live", nav_opinions: "Opinions", opinions_title: "Student Opinions", opinion_placeholder: "Write your opinion here...", opinion_submit_btn: "Publish Opinion", opinion_success: "Your opinion has been published!", settings_saved: "Settings saved successfully!", announcement_sent: "Announcement sent successfully!", nav_announcements: "Announcements", nav_site_settings: "Site Settings", "nav_text_editor": "Manage Site Text", nav_ratings_admin: "Website Ratings", nav_ai_tools_admin: "Manage AI Tools" } 
     };
     const themes = [ 
         { name: 'Forest', accent: '#00ff7f', glow: 'rgba(0,255,127,0.4)', hover: '#33ff99' }, 
@@ -628,22 +321,8 @@ document.addEventListener('DOMContentLoaded', () => {
             themeContainer.appendChild(btn); 
         }); 
     }
-    function updateActiveUI() { 
-        const lang = localStorage.getItem('moraLectureHubLang') || 'ar'; 
-        document.querySelectorAll('#lang-switcher .settings-btn').forEach(btn => btn.classList.toggle('active', btn.dataset.lang === lang)); 
-        const themeName = localStorage.getItem('moraLectureHubTheme') || 'Forest'; 
-        const theme = themes.find(t => t.name === themeName) || themes[0]; 
-        document.querySelectorAll('#theme-switcher .theme-btn').forEach(btn => btn.classList.toggle('active', btn.title === themeName)); 
-        const mode = localStorage.getItem('moraLectureHubMode') || 'mode-dark'; 
-        document.querySelectorAll('#mode-switcher .settings-btn').forEach(btn => btn.classList.toggle('active', btn.dataset.mode === mode)); 
-    }
-    function showAuthMessage(messageKey) { 
-        const lang = htmlEl.lang || 'ar'; 
-        const siteTexts = getTextContentDB(); 
-        authMessage.textContent = siteTexts[messageKey] || translations.en[messageKey] || "Action completed."; 
-        authMessage.style.display = 'block'; 
-        setTimeout(() => { authMessage.style.display = 'none'; }, 2500); 
-    }
+    function updateActiveUI() { const lang = localStorage.getItem('moraLectureHubLang') || 'ar'; document.querySelectorAll('#lang-switcher .settings-btn').forEach(btn => btn.classList.toggle('active', btn.dataset.lang === lang)); const themeName = localStorage.getItem('moraLectureHubTheme') || 'Forest'; const theme = themes.find(t => t.name === themeName) || themes[0]; document.querySelectorAll('#theme-switcher .theme-btn').forEach(btn => btn.classList.toggle('active', btn.title === themeName)); const mode = localStorage.getItem('moraLectureHubMode') || 'mode-dark'; document.querySelectorAll('#mode-switcher .settings-btn').forEach(btn => btn.classList.toggle('active', btn.dataset.mode === mode)); }
+    function showAuthMessage(messageKey) { const lang = htmlEl.lang || 'ar'; const siteTexts = getTextContentDB(); authMessage.textContent = siteTexts[messageKey] || translations.en[messageKey] || "Action completed."; authMessage.style.display = 'block'; setTimeout(() => { authMessage.style.display = 'none'; }, 2500); }
     
     function updateMajors(year, majorDropdown) {
         const lang = htmlEl.lang || 'ar';
@@ -653,6 +332,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (year === '1' || year === '2') {
             majors = { "أعمال دولية": "major_option_1", "نظم معلومات": "major_option_2" };
         }
+        // Removed 3rd and 4th year
         for (const majorName in majors) {
             const key = majors[majorName];
             majorDropdown.innerHTML += `<option value="${majorName}" data-key="${key}">${siteTexts[key]}</option>`;
@@ -800,7 +480,8 @@ document.addEventListener('DOMContentLoaded', () => {
             subjects.forEach((subject, index) => { 
                 const card = document.createElement('div'); 
                 card.className = 'course-card'; 
-                card.innerHTML = `<i class="fas ${getIconForCourse(subject)}"></i><h3>${subject}</h3>`; 
+                // Modified text to show "محاضرات+سكاشن+كتب" in one line below the subject name
+                card.innerHTML = `<i class="fas ${getIconForCourse(subject)}"></i><h3>${subject}</h3><p style="font-size: 0.85rem; opacity: 0.8; margin-top: 5px;">محاضرات+سكاشن+كتب</p>`; 
                 card.style.animationDelay = `${0.1 * index}s`; 
                 card.addEventListener('click', () => showSubjectContent(subject, 'all')); 
                 coursesContainer.appendChild(card); 
@@ -809,23 +490,8 @@ document.addEventListener('DOMContentLoaded', () => {
         currentView = 'subjects'; 
     }
     
-    function getIconForCourse(e) { 
-        const t = e.toLowerCase(); 
-        return t.includes("محاسبة") || t.includes("مالية") || t.includes("تكاليف") || t.includes("ضريبية") ? "fa-calculator" : 
-               t.includes("اقتصاد") ? "fa-chart-line" : 
-               t.includes("قانون") ? "fa-gavel" : 
-               t.includes("إدارة") || t.includes("اعمال") || t.includes("سلوك") || t.includes("تسويق") ? "fa-briefcase" : 
-               t.includes("حاسب") || t.includes("معلومات") || t.includes("بيانات") || t.includes("برامج") || t.includes("شبكات") ? "fa-laptop-code" : 
-               t.includes("رياضيات") || t.includes("احصاء") || t.includes("كمية") ? "fa-square-root-alt" : 
-               t.includes("لغة") || t.includes("اتصال") ? "fa-language" : 
-               t.includes("حقوق") ? "fa-landmark" : 
-               t.includes("مصرفية") || t.includes("بنوك") ? "fa-university" : "fa-book-open"; 
-    }
-    function getCurrentUserData() { 
-        const username = getCurrentUsername(); 
-        if(!username) return null; 
-        return getUserProfile(username); 
-    }
+    function getIconForCourse(e) { const t = e.toLowerCase(); return t.includes("محاسبة") || t.includes("مالية") || t.includes("تكاليف") || t.includes("ضريبية") ? "fa-calculator" : t.includes("اقتصاد") ? "fa-chart-line" : t.includes("قانون") ? "fa-gavel" : t.includes("إدارة") || t.includes("اعمال") || t.includes("سلوك") || t.includes("تسويق") ? "fa-briefcase" : t.includes("حاسب") || t.includes("معلومات") || t.includes("بيانات") || t.includes("برامج") || t.includes("شبكات") ? "fa-laptop-code" : t.includes("رياضيات") || t.includes("احصاء") || t.includes("كمية") ? "fa-square-root-alt" : t.includes("لغة") || t.includes("اتصال") ? "fa-language" : t.includes("حقوق") ? "fa-landmark" : t.includes("مصرفية") || t.includes("بنوك") ? "fa-university" : "fa-book-open"; }
+    function getCurrentUserData() { const username = getCurrentUsername(); if(!username) return null; return getUserProfile(username); }
     
     function showSubjectContent(subjectTitle, contentType) {
         updateUserActivity();
@@ -917,130 +583,16 @@ document.addEventListener('DOMContentLoaded', () => {
         
         mainPage.classList.add('details-active');
     }
-    function displayVideoCategories() { 
-        updateUserActivity(); 
-        const lang = htmlEl.lang || 'ar'; 
-        coursesContainer.innerHTML = ""; 
-        Object.keys(videoCoursesData).forEach((key, index) => { 
-            const category = videoCoursesData[key]; 
-            const card = document.createElement('div'); 
-            card.className = 'course-card'; 
-            card.innerHTML = `<i class="${category.icon}"></i><h3>${lang === 'ar' ? category.title_ar : category.title_en}</h3>`; 
-            card.style.animationDelay = `${0.1 * index}s`; 
-            card.addEventListener('click', () => showVideoList(key)); 
-            coursesContainer.appendChild(card); 
-        }); 
-        currentView = 'videos'; 
-    }
-    function showVideoList(categoryKey) { 
-        updateUserActivity(); 
-        const lang = htmlEl.lang || 'ar'; 
-        const category = videoCoursesData[categoryKey]; 
-        if (!category) return; 
-        detailsViewTitle.textContent = lang === 'ar' ? category.title_ar : category.title_en; 
-        detailsViewList.innerHTML = ''; 
-        category.videos.forEach((video, index) => { 
-            const item = document.createElement('div'); 
-            item.className = 'detail-item'; 
-            item.style.animationDelay = `${index * 0.05}s`; 
-            item.innerHTML = `<span>${video.title}</span> <i class="fas fa-play-circle lock-icon"></i>`; 
-            item.addEventListener('click', () => showVideoPlayerModal(video.embed_url)); 
-            detailsViewList.appendChild(item); 
-        }); 
-        mainPage.classList.add('details-active'); 
-    }
-    function showVideoPlayerModal(embedUrl) { 
-        updateUserActivity(); 
-        const videoPlayerModal = document.getElementById('video-player-modal'); 
-        const videoContainer = document.getElementById('video-player-container'); 
-        if (!videoPlayerModal || !videoContainer) return; 
-        videoContainer.innerHTML = `<iframe src="${embedUrl}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`; 
-        videoPlayerModal.classList.add('active'); 
-    }
+    function displayVideoCategories() { updateUserActivity(); const lang = htmlEl.lang || 'ar'; coursesContainer.innerHTML = ""; Object.keys(videoCoursesData).forEach((key, index) => { const category = videoCoursesData[key]; const card = document.createElement('div'); card.className = 'course-card'; card.innerHTML = `<i class="${category.icon}"></i><h3>${lang === 'ar' ? category.title_ar : category.title_en}</h3>`; card.style.animationDelay = `${0.1 * index}s`; card.addEventListener('click', () => showVideoList(key)); coursesContainer.appendChild(card); }); currentView = 'videos'; }
+    function showVideoList(categoryKey) { updateUserActivity(); const lang = htmlEl.lang || 'ar'; const category = videoCoursesData[categoryKey]; if (!category) return; detailsViewTitle.textContent = lang === 'ar' ? category.title_ar : category.title_en; detailsViewList.innerHTML = ''; category.videos.forEach((video, index) => { const item = document.createElement('div'); item.className = 'detail-item'; item.style.animationDelay = `${index * 0.05}s`; item.innerHTML = `<span>${video.title}</span> <i class="fas fa-play-circle lock-icon"></i>`; item.addEventListener('click', () => showVideoPlayerModal(video.embed_url)); detailsViewList.appendChild(item); }); mainPage.classList.add('details-active'); }
+    function showVideoPlayerModal(embedUrl) { updateUserActivity(); const videoPlayerModal = document.getElementById('video-player-modal'); const videoContainer = document.getElementById('video-player-container'); if (!videoPlayerModal || !videoContainer) return; videoContainer.innerHTML = `<iframe src="${embedUrl}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`; videoPlayerModal.classList.add('active'); }
     
     // --- POMODORO TIMER FUNCTIONS ---
-    function formatTime(seconds) { 
-        const m = Math.floor(seconds / 60); 
-        const s = seconds % 60; 
-        return `${m < 10 ? '0' : ''}${m}:${s < 10 ? '0' : ''}${s}`; 
-    }
-    function updateTimerDisplay() { 
-        timerDisplay.textContent = formatTime(timeRemaining); 
-    }
-    function updatePomodoroUI() { 
-        const siteTexts = getTextContentDB(); 
-        if (pomodoroState === 'work') { 
-            timerContainer.classList.remove('break-mode'); 
-            timerContainer.classList.add('work-mode'); 
-            pomodoroMode.textContent = siteTexts.pomodoro_mode_work; 
-        } else { 
-            timerContainer.classList.remove('work-mode'); 
-            timerContainer.classList.add('break-mode'); 
-            pomodoroMode.textContent = siteTexts.pomodoro_mode_break; 
-        } 
-        pomodoroCycles.textContent = `${siteTexts.pomodoro_cycles} ${cycleCount} / 4`; 
-    }
-    function startPauseTimer() { 
-        const siteTexts = getTextContentDB(); 
-        if (isTimerRunning) { 
-            clearInterval(timerInterval); 
-            startPauseTimerBtn.textContent = siteTexts.timer_start_btn; 
-            startPauseTimerBtn.classList.remove('running'); 
-            timerLiveIndicator.classList.remove('active'); 
-            timerLiveText.classList.remove('active'); 
-        } else { 
-            timerLiveIndicator.classList.add('active'); 
-            timerLiveText.classList.add('active'); 
-            timerInterval = setInterval(() => { 
-                timeRemaining--; 
-                updateTimerDisplay(); 
-                if (timeRemaining <= 0) { 
-                    clearInterval(timerInterval); 
-                    const completedState = pomodoroState; 
-                    if (pomodoroState === 'work') { 
-                        pomodoroState = 'break'; 
-                        timeRemaining = breakDuration; 
-                        if (cycleCount >= 4) { 
-                            cycleCount = 1; 
-                        } 
-                    } else { 
-                        pomodoroState = 'work'; 
-                        timeRemaining = workDuration; 
-                        cycleCount++; 
-                    } 
-                    updatePomodoroUI(); 
-                    updateTimerDisplay(); 
-                    isTimerRunning = false; 
-                    startPauseTimerBtn.textContent = siteTexts.timer_start_btn; 
-                    startPauseTimerBtn.classList.remove('running'); 
-                    timerLiveIndicator.classList.remove('active'); 
-                    timerLiveText.classList.remove('active'); 
-                    if (completedState === 'work') { 
-                        showAuthMessage('pomodoro_work_done'); 
-                    } else { 
-                        showAuthMessage('pomodoro_break_done'); 
-                    } 
-                } 
-            }, 1000); 
-            startPauseTimerBtn.textContent = siteTexts.timer_pause_btn; 
-            startPauseTimerBtn.classList.add('running'); 
-        } 
-        isTimerRunning = !isTimerRunning; 
-    }
-    function resetTimer() { 
-        const siteTexts = getTextContentDB(); 
-        clearInterval(timerInterval); 
-        isTimerRunning = false; 
-        pomodoroState = 'work'; 
-        cycleCount = 1; 
-        timeRemaining = workDuration; 
-        updatePomodoroUI(); 
-        updateTimerDisplay(); 
-        startPauseTimerBtn.textContent = siteTexts.timer_start_btn; 
-        startPauseTimerBtn.classList.remove('running'); 
-        timerLiveIndicator.classList.remove('active'); 
-        timerLiveText.classList.remove('active'); 
-    }
+    function formatTime(seconds) { const m = Math.floor(seconds / 60); const s = seconds % 60; return `${m < 10 ? '0' : ''}${m}:${s < 10 ? '0' : ''}${s}`; }
+    function updateTimerDisplay() { timerDisplay.textContent = formatTime(timeRemaining); }
+    function updatePomodoroUI() { const siteTexts = getTextContentDB(); if (pomodoroState === 'work') { timerContainer.classList.remove('break-mode'); timerContainer.classList.add('work-mode'); pomodoroMode.textContent = siteTexts.pomodoro_mode_work; } else { timerContainer.classList.remove('work-mode'); timerContainer.classList.add('break-mode'); pomodoroMode.textContent = siteTexts.pomodoro_mode_break; } pomodoroCycles.textContent = `${siteTexts.pomodoro_cycles} ${cycleCount} / 4`; }
+    function startPauseTimer() { const siteTexts = getTextContentDB(); if (isTimerRunning) { clearInterval(timerInterval); startPauseTimerBtn.textContent = siteTexts.timer_start_btn; startPauseTimerBtn.classList.remove('running'); timerLiveIndicator.classList.remove('active'); timerLiveText.classList.remove('active'); } else { timerLiveIndicator.classList.add('active'); timerLiveText.classList.add('active'); timerInterval = setInterval(() => { timeRemaining--; updateTimerDisplay(); if (timeRemaining <= 0) { clearInterval(timerInterval); const completedState = pomodoroState; if (pomodoroState === 'work') { pomodoroState = 'break'; timeRemaining = breakDuration; if (cycleCount >= 4) { cycleCount = 1; } } else { pomodoroState = 'work'; timeRemaining = workDuration; cycleCount++; } updatePomodoroUI(); updateTimerDisplay(); isTimerRunning = false; startPauseTimerBtn.textContent = siteTexts.timer_start_btn; startPauseTimerBtn.classList.remove('running'); timerLiveIndicator.classList.remove('active'); timerLiveText.classList.remove('active'); if (completedState === 'work') { showAuthMessage('pomodoro_work_done'); } else { showAuthMessage('pomodoro_break_done'); } } }, 1000); startPauseTimerBtn.textContent = siteTexts.timer_pause_btn; startPauseTimerBtn.classList.add('running'); } isTimerRunning = !isTimerRunning; }
+    function resetTimer() { const siteTexts = getTextContentDB(); clearInterval(timerInterval); isTimerRunning = false; pomodoroState = 'work'; cycleCount = 1; timeRemaining = workDuration; updatePomodoroUI(); updateTimerDisplay(); startPauseTimerBtn.textContent = siteTexts.timer_start_btn; startPauseTimerBtn.classList.remove('running'); timerLiveIndicator.classList.remove('active'); timerLiveText.classList.remove('active'); }
     
     // --- OPINIONS FUNCTIONS ---
     function renderOpinions() {
@@ -1087,24 +639,8 @@ document.addEventListener('DOMContentLoaded', () => {
         showAuthMessage('opinion_success');
     }
     // --- ADMIN PANEL FUNCTIONS ---
-    function showAdminPanel() { 
-        loginPage.classList.remove('active'); 
-        mainPage.classList.remove('active'); 
-        adminPanel.classList.add('active'); 
-        populateAdminPanel(); 
-        clearInterval(activeUserInterval); 
-        activeUserInterval = setInterval(populateActiveUsers, 15000); 
-    }
-    function populateAdminPanel() { 
-        populateAdminStats(); 
-        populateAdminOpinions(); 
-        populateStudentList(); 
-        populateSiteSettings(); 
-        populateAdminTextEditor(); 
-        populateActiveUsers(); 
-        populateAdminRatings(); 
-        populateAdminAiTools(); 
-    }
+    function showAdminPanel() { loginPage.classList.remove('active'); mainPage.classList.remove('active'); adminPanel.classList.add('active'); populateAdminPanel(); clearInterval(activeUserInterval); activeUserInterval = setInterval(populateActiveUsers, 15000); }
+    function populateAdminPanel() { populateAdminStats(); populateAdminOpinions(); populateStudentList(); populateSiteSettings(); populateAdminTextEditor(); populateActiveUsers(); populateAdminRatings(); populateAdminAiTools(); }
     function populateActiveUsers() {
         const users = getUsersDB();
         const now = Date.now();
@@ -1194,15 +730,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const subjectsList = container.querySelector('.admin-subjects-list');
         const render = () => renderSubjectsForAdmin(yearSelectAdmin.value, majorSelectAdmin.value, semesterSelectAdmin.value, subjectsList, contentType);
         
-        yearSelectAdmin.addEventListener('change', () => { 
-            updateMajors(yearSelectAdmin.value, majorSelectAdmin); 
-            semesterSelectAdmin.value = '1'; 
-            render(); 
-        });
-        majorSelectAdmin.addEventListener('change', () => { 
-            semesterSelectAdmin.value = '1'; 
-            render(); 
-        });
+        yearSelectAdmin.addEventListener('change', () => { updateMajors(yearSelectAdmin.value, majorSelectAdmin); semesterSelectAdmin.value = '1'; render(); });
+        majorSelectAdmin.addEventListener('change', () => { semesterSelectAdmin.value = '1'; render(); });
         semesterSelectAdmin.addEventListener('change', render);
     }
     
@@ -1382,7 +911,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const currentTexts = getTextContentDB();
         const textGroups = {
             "واجهة الدخول والتسجيل": ['login_choice_btn', 'create_account_btn', 'create_account_title', 'register_btn', 'login_title_main', 'login_btn_main', 'name_placeholder', 'password_label', 'password_format_hint', 'password_forgot_hint', 'year_placeholder', 'major_placeholder', 'semester_warning_text', 'auth_error_no_account', 'auth_error_user_exists', 'auth_error_wrong_pass', 'auth_error_banned', 'captcha_enter_code', 'captcha_error'],
-            "الواجهة الرئيسية": ['welcome_back', 'nav_pdf', 'nav_sections', 'nav_ai', 'nav_platform', 'nav_settings', 'nav_about', 'nav_courses', 'nav_meetings'],
+            "الواجهة الرئيسية": ['welcome_back', 'nav_pdf', 'nav_sections', 'nav_ai', 'nav_platform', 'nav_settings', 'nav_about', 'nav_courses', 'nav_meetings', 'nav_info'],
             "الرسائل والتنبيهات": ['logout_msg', 'fill_all_fields', 'opinion_success', 'rating_thanks', 'blog_saved_success', 'settings_saved', 'announcement_sent', 'clear_data_confirm'],
             "نصوص الأقسام المقفولة": ['courses_locked_msg', 'meetings_locked_main', 'meetings_locked_sub', 'locked_lectures_msg', 'locked_pdfs_msg', 'locked_sections_msg'],
             "نصوص أخرى": ['points_info_main', 'points_info_dev_credit', 'pomodoro_desc', 'pomodoro_work_done', 'pomodoro_break_done']
@@ -1412,7 +941,6 @@ document.addEventListener('DOMContentLoaded', () => {
             details.appendChild(contentDiv);
             form.appendChild(details);
         }
-        
         form.innerHTML += `<button type="submit" class="submit-btn" style="font-size: 1.1rem; padding: 12px; margin-top: 10px;">حفظ النصوص</button>`;
     }
     
@@ -1432,12 +960,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     starsHTML += `<i class="${i <= rating.rating ? 'fas' : 'far'} fa-star"></i>`;
                 }
                 card.innerHTML = `<div class="opinion-card-header">
-                                        <div class="opinion-author-details">
-                                            <span class="opinion-author">${rating.username}</span>
-                                            <span class="opinion-meta rating-card-stars">${starsHTML}</span>
-                                        </div>
-                                        <span class="opinion-timestamp">${date}</span>
-                                    </div>`;
+                                    <div class="opinion-author-details">
+                                        <span class="opinion-author">${rating.username}</span>
+                                        <span class="opinion-meta rating-card-stars">${starsHTML}</span>
+                                    </div>
+                                    <span class="opinion-timestamp">${date}</span>
+                                  </div>`;
                 container.appendChild(card);
             });
         }
@@ -1450,9 +978,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const itemEl = document.createElement('div');
             itemEl.className = 'detail-item';
             itemEl.innerHTML = `<span>${tool.name}</span>
-                                <div style="display: flex; align-items: center; gap: 15px;">
-                                  <button class="delete-btn" data-id="${tool.id}" title="حذف"><i class="fas fa-trash"></i></button>
-                                </div>`;
+                              <div style="display: flex; align-items: center; gap: 15px;">
+                                <button class="delete-btn" data-id="${tool.id}" title="حذف"><i class="fas fa-trash"></i></button>
+                              </div>`;
             itemEl.querySelector('.delete-btn').addEventListener('click', () => {
                 if (confirm(`هل أنت متأكد من حذف أداة "${tool.name}"؟`)) {
                     const newTools = getAiToolsDB().filter(t => t.id !== tool.id);
@@ -1467,27 +995,9 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // --- EVENT LISTENERS ---
     yearSelect.addEventListener('change', (e) => updateMajors(e.target.value, majorSelect));
-    semesterSelect.addEventListener('change', () => { 
-        const lang = htmlEl.lang || 'ar'; 
-        const siteTexts = getTextContentDB(); 
-        const submitBtn = document.querySelector('#create-account-form .submit-btn'); 
-        if (semesterSelect.value === '2') { 
-            submitBtn.disabled = true; 
-            semesterWarning.textContent = siteTexts.semester_warning_text; 
-        } else { 
-            submitBtn.disabled = false; 
-            semesterWarning.textContent = ''; 
-        } 
-    });
+    semesterSelect.addEventListener('change', () => { const lang = htmlEl.lang || 'ar'; const siteTexts = getTextContentDB(); const submitBtn = document.querySelector('#create-account-form .submit-btn'); if (semesterSelect.value === '2') { submitBtn.disabled = true; semesterWarning.textContent = siteTexts.semester_warning_text; } else { submitBtn.disabled = false; semesterWarning.textContent = ''; } });
     createAccountChoiceBtn.addEventListener('click', () => showAuthView('create'));
-    loginChoiceBtn.addEventListener('click', () => { 
-        const users = getUsersDB(); 
-        if (Object.keys(users).filter(u => u !== 'admen').length === 0 && !users['admen']) { 
-            showAuthMessage('auth_error_no_account'); 
-            return; 
-        } 
-        showAuthView('login'); 
-    });
+    loginChoiceBtn.addEventListener('click', () => { const users = getUsersDB(); if (Object.keys(users).filter(u => u !== 'admen').length === 0 && !users['admen']) { showAuthMessage('auth_error_no_account'); return; } showAuthView('login'); });
     document.querySelectorAll('.back-to-choice-btn').forEach(btn => btn.addEventListener('click', () => showAuthView('choice')));
     createAccountForm.addEventListener('submit', (e) => {
         e.preventDefault();
@@ -1496,50 +1006,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const userInputCaptcha = captchaInput.value;
         const country = document.getElementById('create-country').value;
         const governorate = document.getElementById('create-governorate').value;
-        if (!createAccountForm.checkValidity() || !name || !yearSelect.value || !majorSelect.value) { 
-            showAuthMessage('fill_all_fields'); 
-            return; 
-        }
-        if (password.length < 8 || !/^(?=.*[a-zA-Z])(?=.*[0-9])/.test(password)) { 
-            showAuthMessage(password.length < 8 ? 'password_error_length' : 'password_error_format'); 
-            return; 
-        }
-        if (name.toLowerCase() === 'admen') { 
-            showAuthMessage('auth_error_user_exists'); 
-            return; 
-        }
+        if (!createAccountForm.checkValidity() || !name || !yearSelect.value || !majorSelect.value) { showAuthMessage('fill_all_fields'); return; }
+        if (password.length < 8 || !/^(?=.*[a-zA-Z])(?=.*[0-9])/.test(password)) { showAuthMessage(password.length < 8 ? 'password_error_length' : 'password_error_format'); return; }
+        if (name.toLowerCase() === 'admen') { showAuthMessage('auth_error_user_exists'); return; }
         
-        if (userInputCaptcha !== captchaText) { 
-            showAuthMessage('captcha_error'); 
-            generateNumericCaptcha(); 
-            captchaInput.value = ''; 
-            return; 
-        }
+        if (userInputCaptcha !== captchaText) { showAuthMessage('captcha_error'); generateNumericCaptcha(); captchaInput.value = ''; return; }
         const db = getUsersDB();
-        if (db[name]) { 
-            showAuthMessage('auth_error_user_exists'); 
-            return; 
-        }
-        db[name] = { 
-            password: password, 
-            profile: { 
-                name: name, 
-                year: yearSelect.value, 
-                major: majorSelect.options[majorSelect.selectedIndex].text, 
-                semester: semesterSelect.value, 
-                country, 
-                governorate 
-            }, 
-             { 
-                points: 0, 
-                rated: false, 
-                note: '', 
-                banned: false, 
-                viewedContent: [], 
-                lastSeenAnnouncement: null, 
-                last_active: null 
-            } 
-        };
+        if (db[name]) { showAuthMessage('auth_error_user_exists'); return; }
+        db[name] = { password: password, profile: { name: name, year: yearSelect.value, major: majorSelect.options[majorSelect.selectedIndex].text, semester: semesterSelect.value, country, governorate },  { points: 0, rated: false, note: '', banned: false, viewedContent: [], lastSeenAnnouncement: null, last_active: null } };
         saveUsersDB(db);
         localStorage.setItem(LAST_USER_KEY, name);
         showAuthView('login', { newName: name, newPassword: password });
@@ -1548,10 +1022,7 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
         const name = document.getElementById('login-name').value.trim();
         const password = document.getElementById('login-password').value;
-        if (!name || !password) { 
-            showAuthMessage('fill_all_fields'); 
-            return; 
-        }
+        if (!name || !password) { showAuthMessage('fill_all_fields'); return; }
         if (name.toLowerCase() === 'admen' && password === 'Amr1221@gmail.com') {
             localStorage.setItem(CURRENT_USER_KEY, 'admen');
             localStorage.setItem('moraCurrentUserRole', 'admin');
@@ -1568,14 +1039,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         const db = getUsersDB();
         const user = db[name];
-        if (!user || user.password !== password) { 
-            showAuthMessage('auth_error_wrong_pass'); 
-            return; 
-        }
-        if (user.data?.banned) { 
-            showAuthMessage('auth_error_banned'); 
-            return; 
-        }
+        if (!user || user.password !== password) { showAuthMessage('auth_error_wrong_pass'); return; }
+        if (user.data?.banned) { showAuthMessage('auth_error_banned'); return; }
         
         localStorage.setItem(CURRENT_USER_KEY, name);
         localStorage.setItem('moraCurrentUserRole', 'student');
@@ -1594,16 +1059,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 700);
     });
     captchaRefreshBtn.addEventListener('click', generateNumericCaptcha);
-    document.querySelectorAll('.password-toggle').forEach(icon => { 
-        icon.addEventListener('click', () => { 
-            const wrapper = icon.closest('.password-wrapper'); 
-            const input = wrapper.querySelector('input'); 
-            const isPassword = input.type === 'password'; 
-            input.type = isPassword ? 'text' : 'password'; 
-            icon.classList.toggle('fa-eye', !isPassword); 
-            icon.classList.toggle('fa-eye-slash', isPassword); 
-        }); 
-    });
+    document.querySelectorAll('.password-toggle').forEach(icon => { icon.addEventListener('click', () => { const wrapper = icon.closest('.password-wrapper'); const input = wrapper.querySelector('input'); const isPassword = input.type === 'password'; input.type = isPassword ? 'text' : 'password'; icon.classList.toggle('fa-eye', !isPassword); icon.classList.toggle('fa-eye-slash', isPassword); }); });
     
     backToCoursesBtn.addEventListener('click', () => {
         mainPage.classList.remove('details-active');
@@ -1641,14 +1097,8 @@ document.addEventListener('DOMContentLoaded', () => {
         pointsInfoToast.classList.remove('show');
         pointingArrow.classList.remove('show');
     });
-    document.getElementById('lang-switcher').addEventListener('click', e => { 
-        if (e.target.closest('.settings-btn')?.dataset.lang) 
-            setLanguage(e.target.closest('.settings-btn').dataset.lang); 
-    });
-    document.getElementById('mode-switcher').addEventListener('click', e => { 
-        if (e.target.closest('.settings-btn')?.dataset.mode) 
-            setSetting('mode', e.target.closest('.settings-btn').dataset.mode); 
-    });
+    document.getElementById('lang-switcher').addEventListener('click', e => { if (e.target.closest('.settings-btn')?.dataset.lang) setLanguage(e.target.closest('.settings-btn').dataset.lang); });
+    document.getElementById('mode-switcher').addEventListener('click', e => { if (e.target.closest('.settings-btn')?.dataset.mode) setSetting('mode', e.target.closest('.settings-btn').dataset.mode); });
     
     document.querySelectorAll('[data-modal]').forEach(trigger => { 
         trigger.addEventListener('click', () => { 
@@ -1682,62 +1132,11 @@ document.addEventListener('DOMContentLoaded', () => {
     resetTimerBtn.addEventListener('click', resetTimer);
     opinionForm.addEventListener('submit', handleOpinionSubmit);
     const rateBtn = document.getElementById('rate-website-btn'), blogBtn = document.getElementById('blog-btn'), ratingModal = document.getElementById('rating-modal'), ratingStars = ratingModal.querySelectorAll('.rating-stars i'), blogTextarea = document.getElementById('blog-textarea'), saveBlogBtn = document.getElementById('save-blog-btn'), charCounter = document.getElementById('char-counter');
-    function checkRatedStatus() { 
-        const username = getCurrentUsername(); 
-        if(!username) return; 
-        const hasRated = getUserData(username, 'rated'); 
-        rateBtn.style.display = hasRated ? 'none' : 'flex'; 
-        blogBtn.style.display = hasRated ? 'flex' : 'none'; 
-    }
-    ratingStars.forEach(star => { 
-        star.addEventListener('mouseover', () => { 
-            for (let i = 0; i < ratingStars.length; i++) { 
-                ratingStars[i].classList.toggle('fas', i < star.dataset.value); 
-                ratingStars[i].classList.toggle('far', i >= star.dataset.value); 
-            } 
-        }); 
-        star.addEventListener('mouseout', () => { 
-            ratingStars.forEach(s => { 
-                s.classList.remove('fas'); 
-                s.classList.add('far'); 
-            }); 
-        }); 
-        star.addEventListener('click', () => { 
-            const username = getCurrentUsername(); 
-            if(username) { 
-                setUserData(username, 'rated', true); 
-                const newRating = { username, rating: star.dataset.value, timestamp: new Date().toISOString() }; 
-                const ratings = getRatings(); 
-                ratings.unshift(newRating); 
-                saveRatings(ratings); 
-            } 
-            ratingModal.classList.remove('active'); 
-            showAuthMessage('rating_thanks'); 
-            checkRatedStatus(); 
-            document.getElementById('about-modal').classList.add('active'); 
-        }); 
-    });
-    blogBtn.addEventListener('click', () => { 
-        const username = getCurrentUsername(); 
-        if(!username) return; 
-        blogTextarea.value = getUserData(username, 'note') || ''; 
-        charCounter.textContent = `${blogTextarea.value.length} / 1000`; 
-    });
-    blogTextarea.addEventListener('input', () => { 
-        charCounter.textContent = `${blogTextarea.value.length} / 1000`; 
-    });
-    saveBlogBtn.addEventListener('click', () => { 
-        const username = getCurrentUsername(); 
-        if(username) setUserData(username, 'note', blogTextarea.value); 
-        const siteTexts = getTextContentDB(); 
-        const originalText = siteTexts.blog_save_btn; 
-        saveBlogBtn.textContent = siteTexts.blog_saved_success; 
-        saveBlogBtn.classList.add('saved'); 
-        setTimeout(() => { 
-            saveBlogBtn.textContent = originalText; 
-            saveBlogBtn.classList.remove('saved'); 
-        }, 2000); 
-    });
+    function checkRatedStatus() { const username = getCurrentUsername(); if(!username) return; const hasRated = getUserData(username, 'rated'); rateBtn.style.display = hasRated ? 'none' : 'flex'; blogBtn.style.display = hasRated ? 'flex' : 'none'; }
+    ratingStars.forEach(star => { star.addEventListener('mouseover', () => { for (let i = 0; i < ratingStars.length; i++) { ratingStars[i].classList.toggle('fas', i < star.dataset.value); ratingStars[i].classList.toggle('far', i >= star.dataset.value); } }); star.addEventListener('mouseout', () => { ratingStars.forEach(s => { s.classList.remove('fas'); s.classList.add('far'); }); }); star.addEventListener('click', () => { const username = getCurrentUsername(); if(username) { setUserData(username, 'rated', true); const newRating = { username, rating: star.dataset.value, timestamp: new Date().toISOString() }; const ratings = getRatings(); ratings.unshift(newRating); saveRatings(ratings); } ratingModal.classList.remove('active'); showAuthMessage('rating_thanks'); checkRatedStatus(); document.getElementById('about-modal').classList.add('active'); }); });
+    blogBtn.addEventListener('click', () => { const username = getCurrentUsername(); if(!username) return; blogTextarea.value = getUserData(username, 'note') || ''; charCounter.textContent = `${blogTextarea.value.length} / 1000`; });
+    blogTextarea.addEventListener('input', () => { charCounter.textContent = `${blogTextarea.value.length} / 1000`; });
+    saveBlogBtn.addEventListener('click', () => { const username = getCurrentUsername(); if(username) setUserData(username, 'note', blogTextarea.value); const siteTexts = getTextContentDB(); const originalText = siteTexts.blog_save_btn; saveBlogBtn.textContent = siteTexts.blog_saved_success; saveBlogBtn.classList.add('saved'); setTimeout(() => { saveBlogBtn.textContent = originalText; saveBlogBtn.classList.remove('saved'); }, 2000); });
     
     coursesBtn.addEventListener('click', () => {
         updateUserActivity();
@@ -1759,26 +1158,7 @@ document.addEventListener('DOMContentLoaded', () => {
             coursesLockedModal.classList.add('active');
         }
     });
-    function showRedirectModal(sourceModalId, actionCallback, customMessage) { 
-        const sourceModal = document.getElementById(sourceModalId); 
-        if (sourceModal) sourceModal.classList.remove('active'); 
-        const siteTexts = getTextContentDB(); 
-        const redirectMessageEl = redirectModal.querySelector('.redirect-message'); 
-        redirectMessageEl.textContent = customMessage || siteTexts.redirect_msg; 
-        let seconds = 3; 
-        redirectModal.classList.add('active'); 
-        timerElement.textContent = seconds; 
-        clearInterval(countdownInterval); 
-        countdownInterval = setInterval(() => { 
-            seconds--; 
-            timerElement.textContent = seconds; 
-            if (seconds <= 0) { 
-                clearInterval(countdownInterval); 
-                redirectModal.classList.remove('active'); 
-                if (typeof actionCallback === 'function') actionCallback(); 
-            } 
-        }, 1000); 
-    }
+    function showRedirectModal(sourceModalId, actionCallback, customMessage) { const sourceModal = document.getElementById(sourceModalId); if (sourceModal) sourceModal.classList.remove('active'); const siteTexts = getTextContentDB(); const redirectMessageEl = redirectModal.querySelector('.redirect-message'); redirectMessageEl.textContent = customMessage || siteTexts.redirect_msg; let seconds = 3; redirectModal.classList.add('active'); timerElement.textContent = seconds; clearInterval(countdownInterval); countdownInterval = setInterval(() => { seconds--; timerElement.textContent = seconds; if (seconds <= 0) { clearInterval(countdownInterval); redirectModal.classList.remove('active'); if (typeof actionCallback === 'function') actionCallback(); } }, 1000); }
     
     function studentLogout() { 
         mainPage.classList.add('exit'); 
@@ -1807,14 +1187,8 @@ document.addEventListener('DOMContentLoaded', () => {
             showAuthView('login');
         }, 700);
     }
-    document.getElementById('logout-btn').addEventListener('click', () => { 
-        const siteTexts = getTextContentDB(); 
-        showRedirectModal('about-modal', studentLogout, siteTexts.logout_msg); 
-    });
-    adminLogoutBtn.addEventListener('click', () => { 
-        const siteTexts = getTextContentDB(); 
-        showRedirectModal(null, adminLogout, siteTexts.logout_msg); 
-    });
+    document.getElementById('logout-btn').addEventListener('click', () => { const siteTexts = getTextContentDB(); showRedirectModal('about-modal', studentLogout, siteTexts.logout_msg); });
+    adminLogoutBtn.addEventListener('click', () => { const siteTexts = getTextContentDB(); showRedirectModal(null, adminLogout, siteTexts.logout_msg); });
     
     document.getElementById('clear-data-btn').addEventListener('click', () => {
         const siteTexts = getTextContentDB();
@@ -1952,24 +1326,10 @@ document.addEventListener('DOMContentLoaded', () => {
             a.textContent = tool.name;
             container.appendChild(a);
         });
-        container.querySelectorAll('a').forEach(link => { 
-            link.addEventListener('click', (e) => { 
-                e.preventDefault(); 
-                showRedirectModal('ai-modal', () => window.open(link.href, '_blank')); 
-            }); 
-        });
+        container.querySelectorAll('a').forEach(link => { link.addEventListener('click', (e) => { e.preventDefault(); showRedirectModal('ai-modal', () => window.open(link.href, '_blank')); }); });
     }
-    document.querySelectorAll('.social-icons a').forEach(link => { 
-        link.addEventListener('click', (e) => { 
-            e.preventDefault(); 
-            showRedirectModal(e.target.closest('.modal-overlay')?.id, () => window.open(link.href, '_blank')); 
-        }); 
-    });
-    document.getElementById('platform-btn').addEventListener('click', (e) => { 
-        e.preventDefault(); 
-        updateUserActivity(); 
-        showRedirectModal(null, () => window.open('https://tanta-services.online/TantaPortal/index.php', '_blank')); 
-    });
+    document.querySelectorAll('.social-icons a').forEach(link => { link.addEventListener('click', (e) => { e.preventDefault(); showRedirectModal(e.target.closest('.modal-overlay')?.id, () => window.open(link.href, '_blank')); }); });
+    document.getElementById('platform-btn').addEventListener('click', (e) => { e.preventDefault(); updateUserActivity(); showRedirectModal(null, () => window.open('https://tanta-services.online/TantaPortal/index.php', '_blank')); });
     
     document.body.addEventListener('click', updateUserActivity, true);
     setupLoginAnimation();
