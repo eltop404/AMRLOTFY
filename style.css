@@ -349,7 +349,7 @@ body {
     padding: 5px 10px;
     z-index: 5;
 }
-[dir="ltr"] .back-to-choice-btn {
+[dir=ltr] .back-to-choice-btn {
     right: auto;
     left: 10px;
 }
