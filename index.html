@@ -8,9 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <style>
-        /* سيتم لصق كود CSS هنا لاحقًا */
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="animated-bg">
@@ -134,12 +132,15 @@
         <div id="view-wrapper">
             <div id="courses-container"></div>
             <div id="details-view">
-                <div id="details-header"><button id="back-to-courses-btn" title="Back"><i class="fas fa-arrow-right"></button><h3 id="details-view-title"></h3></div>
+                <div id="details-header"><button id="back-to-courses-btn" title="Back"><i class="fas fa-arrow-right"></i></button><h3 id="details-view-title"></h3></div>
                 <div id="details-view-list"></div>
             </div>
         </div>
         <nav id="bottom-nav">
             <div class="nav-group">
+                <button class="nav-item" data-modal="info-modal"><i class="fas fa-info-circle"></i><span data-key="nav_info">معلومات</span></button>
+                <button class="nav-item" id="meetings-btn"><i class="fas fa-lock"></i><span data-key="nav_meetings">ميتنج</span></button>
+                <button class="nav-item" data-modal="ai-modal"><i class="fas fa-robot"></i><span data-key="nav_ai">AI</span></button>
                 <button class="nav-item" id="platform-btn"><i class="fas fa-university"></i><span data-key="nav_platform">المنصة</span></button>
                 <button class="nav-item" id="courses-btn"><i id="courses-icon" class="fas fa-lock"></i><span data-key="nav_courses">كورسات</span></button>
                 <button class="nav-item" data-modal="opinions-modal"><i class="fas fa-comments"></i><span data-key="nav_opinions">آراء الطلاب</span></button>
@@ -147,9 +148,9 @@
                 <button class="nav-item" data-modal="settings-modal"><i class="fas fa-sliders-h"></i><span data-key="nav_settings">الإعدادات</span></button>
             </div>
         </nav>
-        <div class="footer-copyright">
-            جميع الحقوق محفوظة AmrLotfy 2025
-        </div>
+        <footer class="main-footer">
+            <p>جميع الحقوق محفوظة AmrLotfy 2025</p>
+        </footer>
     </div>
     <div id="admin-panel" class="page">
         <div class="admin-container">
@@ -315,15 +316,7 @@
         <div class="modal-content">
             <button class="close-btn">×</button>
             <h3 data-key="about_title">Mora for Studying</h3>
-            <div class="institute-image-container">
-                <img src="https://i.postimg.cc/gjS04rJw/IMG-20250414-WA0047.jpg" alt="معهد طنطا" class="institute-image">
-            </div>
             <p class="institute-name" data-key="about_desc"></p>
-            <div class="app-info-section">
-                <p><strong>الإصدار:</strong> 11.0</p>
-                <p><strong>رقم المتسلسل:</strong> MOR-2025-001</p>
-                <p>تم تصميم هذا الموقع لتقديم أفضل تجربة تعليمية للطلاب، حيث يجمع بين البساطة والاحترافية لتسهيل الوصول إلى المحاضرات والسكاشن والكتب والمزيد.</p>
-            </div>
             <p class="dev-credit" data-key="about_dev"></p>
             <div class="social-icons">
                 <a href="https://www.instagram.com/eltopamr55?igsh=MWJ2MzJqaXBlZzRlaQ==" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
@@ -417,8 +410,23 @@
         <div id="points-info-toast-content"></div>
     </div>
     <div id="pointing-arrow"></div>
-    <script>
-        // سيتم لصق كود JavaScript هنا لاحقًا
-    </script>
+
+    <!-- New Info Modal -->
+    <div id="info-modal" class="modal-overlay full-screen">
+        <div class="modal-content">
+            <button class="close-btn">×</button>
+            <h3><i class="fas fa-info-circle"></i> معلومات عن الموقع</h3>
+            <img src="https://i.postimg.cc/BnLgYqwX/IMG-20250414-WA0047-1.jpg" alt="معهد طنطا" class="info-institute-image">
+            <div class="info-content">
+                <p>مرحبًا بك في موقع <strong>Mora for Studying</strong>، منصة التعليم الإلكتروني المخصصة لطلاب المعهد العالي للحاسبات والمعلومات بطنطا.</p>
+                <p>تم تصميم هذا الموقع لتقديم تجربة تعليمية متكاملة، حيث يمكنك الوصول إلى محاضراتك، سكاشنك، وكتبك الدراسية بطريقة منظمة وسهلة.</p>
+                <p><strong>الإصدار:</strong> 11.0</p>
+                <p><strong>الرقم التسلسلي:</strong> MOR-2025-001</p>
+                <p class="info-dev-credit">تطوير: <strong>Amr Lotfy</strong></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
