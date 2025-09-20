@@ -8,7 +8,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+    <style>
+        /* سيتم لصق كود CSS هنا لاحقًا */
+    </style>
 </head>
 <body>
     <div class="animated-bg">
@@ -17,36 +19,406 @@
         <div class="glow-element" id="glow2"></div>
     </div>
     
-    <div id="loading-page" class="page active"><div class="loading-container"><div class="loading-spinner"><svg class="progress-ring" width="120" height="120"><circle class="progress-ring__circle-bg" stroke-width="6" fill="transparent" r="54" cx="60" cy="60"/><circle class="progress-ring__circle" stroke-width="6" fill="transparent" r="54" cx="60" cy="60"/></svg><img src="https://i.postimg.cc/BnLgYqwX/IMG-20250414-WA0047-1.jpg" alt="Mora Logo" class="loading-logo"></div><p class="loading-text" data-key="loading_text"></p><p id="wait-message">... من فضلك انتظر</p></div></div>
+    <div id="loading-page" class="page">
+        <div class="loading-container">
+            <div class="loading-spinner">
+                <svg class="progress-ring" width="120" height="120">
+                   <circle class="progress-ring__circle-bg" stroke-width="6" fill="transparent" r="54" cx="60" cy="60"/>
+                   <circle class="progress-ring__circle" stroke-width="6" fill="transparent" r="54" cx="60" cy="60"/>
+                </svg>
+                <img src="https://i.postimg.cc/BnLgYqwX/IMG-20250414-WA0047-1.jpg" alt="Mora Logo" class="loading-logo">
+            </div>
+            <p class="loading-text" data-key="loading_text">متنساش تصلي علي النبي</p>
+            <p id="wait-message">... من فضلك انتظر</p>
+        </div>
+    </div>
     
-    <div id="login-page" class="page"><div class="auth-choice-container" id="auth-choice-view"><div class="login-header"><img src="https://i.postimg.cc/BnLgYqwX/IMG-20250414-WA0047-1.jpg" alt="Mora Logo"><p class="welcome-text"></p></div><button class="auth-btn" id="create-account-choice-btn" data-key="create_account_btn"></button><button class="auth-btn" id="login-choice-btn" data-key="login_choice_btn"></button></div><div class="auth-view" id="create-account-view"><button class="back-to-choice-btn" title="رجوع"><i class="fas fa-arrow-right"></i></button><form id="create-account-form" class="auth-form" novalidate><h1 class="auth-title" data-key="create_account_title"></h1><div class="input-group"><input type="text" id="create-name" required placeholder=" "><label for="create-name" data-key="name_placeholder"></label></div><div class="input-group"><select id="year" required><option value="" disabled selected data-key="year_placeholder"></option><option value="1" data-key="year_1"></option><option value="2" data-key="year_2"></option></select></div><div class="input-group"><select id="major" required><option value="" disabled selected data-key="major_placeholder"></option></select></div><div class="input-group"><select id="semester" required><option value="1" data-key="semester_1"></option><option value="2" data-key="semester_2"></option></select></div><div class="input-group"><div class="password-wrapper"><input type="password" id="create-password" required minlength="8" placeholder=" " autocomplete="new-password"/><label for="create-password" data-key="password_label"></label><i class="fas fa-eye password-toggle"></i></div></div><p class="password-hint" data-key="password_format_hint"></p><div class="captcha-container-numeric"><canvas id="captcha-canvas" width="120" height="40"></canvas><button type="button" id="captcha-refresh-btn" title="تحديث الرمز"><i class="fas fa-sync-alt"></i></button><div class="input-group"><input type="text" id="captcha-input" required placeholder=" " autocomplete="off"><label for="captcha-input" data-key="captcha_enter_code"></label></div></div><div id="semester-warning"></div><button type="submit" form="create-account-form" class="submit-btn" data-key="register_btn"></button><input type="hidden" id="create-country"><input type="hidden" id="create-governorate"></form></div><div class="auth-view" id="login-view"><button class="back-to-choice-btn" title="رجوع"><i class="fas fa-arrow-right"></i></button><form id="login-form" class="auth-form" novalidate><h1 class="auth-title" data-key="login_title_main"></h1><div class="input-group"><input type="text" id="login-name" required placeholder=" "><label for="login-name" data-key="name_placeholder"></label></div><div class="input-group"><div class="password-wrapper"><input type="password" id="login-password" required placeholder=" "/><label for="login-password" data-key="password_label"></label><i class="fas fa-eye password-toggle"></i></div></div><p class="password-hint" data-key="password_forgot_hint"></p><button type="submit" form="login-form" class="submit-btn" data-key="login_btn_main"></button></form></div></div>
+    <div id="login-page" class="page">
+        <div class="auth-choice-container" id="auth-choice-view">
+            <div class="login-header">
+                <img src="https://i.postimg.cc/BnLgYqwX/IMG-20250414-WA0047-1.jpg" alt="Mora Logo">
+                <p class="welcome-text">Welcome to Mora for Studying</p>
+            </div>
+            <button class="auth-btn" id="create-account-choice-btn" data-key="create_account_btn">إنشاء حساب</button>
+            <button class="auth-btn" id="login-choice-btn" data-key="login_choice_btn">تسجيل الدخول</button>
+        </div>
+        <div class="auth-view" id="create-account-view">
+            <button class="back-to-choice-btn" title="رجوع"><i class="fas fa-arrow-right"></i></button>
+            <form id="create-account-form" class="auth-form" novalidate>
+                <h1 class="auth-title" data-key="create_account_title">إنشاء حساب جديد</h1>
+                <div class="input-group">
+                    <input type="text" id="create-name" required placeholder=" ">
+                    <label for="create-name" data-key="name_placeholder">الاسم</label>
+                </div>
+                <div class="input-group">
+                    <select id="year" required>
+                        <option value="" disabled selected data-key="year_placeholder">الفرقة</option>
+                        <option value="1" data-key="year_1">الأولى</option>
+                        <option value="2" data-key="year_2">الثانية</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <select id="major" required>
+                        <option value="" disabled selected data-key="major_placeholder">اختر الفرقة أولاً...</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <select id="semester" required>
+                        <option value="1" data-key="semester_1">الفصل الدراسي الأول</option>
+                        <option value="2" data-key="semester_2">الفصل الدراسي الثاني</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <div class="password-wrapper">
+                       <input type="password" id="create-password" required minlength="8" placeholder=" " autocomplete="new-password"/>
+                       <label for="create-password" data-key="password_label">كلمة السر</label>
+                       <i class="fas fa-eye password-toggle"></i>
+                    </div>
+                </div>
+                <p class="password-hint" data-key="password_format_hint">يجب أن لا تقل عن 8 حروف وتحتوي على أحرف وأرقام.</p>
+                
+                <div class="captcha-container-numeric">
+                    <canvas id="captcha-canvas" width="120" height="40"></canvas>
+                    <button type="button" id="captcha-refresh-btn" title="تحديث الرمز"><i class="fas fa-sync-alt"></i></button>
+                    <div class="input-group">
+                        <input type="text" id="captcha-input" required placeholder=" " autocomplete="off">
+                        <label for="captcha-input" data-key="captcha_enter_code">أدخل الرمز</label>
+                    </div>
+                </div>
+                <div id="semester-warning"></div>
+                 <button type="submit" form="create-account-form" class="submit-btn" data-key="register_btn">سجل الآن</button>
+                 <input type="hidden" id="create-country">
+                 <input type="hidden" id="create-governorate">
+            </form>
+        </div>
+        
+        <div class="auth-view" id="login-view">
+             <button class="back-to-choice-btn" title="رجوع"><i class="fas fa-arrow-right"></i></button>
+             <form id="login-form" class="auth-form" novalidate>
+                 <h1 class="auth-title" data-key="login_title_main">تسجيل الدخول</h1>
+                 <div class="input-group">
+                     <input type="text" id="login-name" required placeholder=" ">
+                     <label for="login-name" data-key="name_placeholder">الاسم</label>
+                 </div>
+                 <div class="input-group">
+                    <div class="password-wrapper">
+                       <input type="password" id="login-password" required placeholder=" "/>
+                       <label for="login-password" data-key="password_label">كلمة السر</label>
+                       <i class="fas fa-eye password-toggle"></i>
+                    </div>
+                 </div>
+                 <p class="password-hint" data-key="password_forgot_hint" style="text-align: center; margin-top: 5px; margin-bottom: 5px; width: 100%;">يجب عليك عدم نسيان كلمه السر</p>
+                 <button type="submit" form="login-form" class="submit-btn" data-key="login_btn_main">دخول</button>
+             </form>
+        </div>
+    </div>
     
     <div id="auth-message"></div>
-
-    <div id="main-page" class="page"><div class="scrolling-banner"><p></p></div><header id="main-header"><div id="timer-live-indicator"></div><p id="timer-live-text" data-key="timer_live_text"></p><div id="points-counter"><i class="fas fa-star"></i><span id="points-display">0</span></div><div class="header-content"><p id="welcome-message-name"></p><p id="welcome-message-details"></p></div><img src="https://i.postimg.cc/gjS04rJw/IMG-20250414-WA0047.jpg" alt="App Logo" id="app-logo"></header><div id="view-wrapper"><div id="courses-container"></div><div id="details-view"><div id="details-header"><button id="back-to-courses-btn" title="Back"><i class="fas fa-arrow-right"></i></button><h3 id="details-view-title"></h3></div><div id="details-view-list"></div></div></div><nav id="bottom-nav"><div class="nav-group"><button class="nav-item" data-action="showContent" data-type="pdfs"><i class="fas fa-book-open"></i><span data-key="nav_pdf"></span></button><button class="nav-item" data-action="showContent" data-type="sections"><i class="fas fa-users-cog"></i><span data-key="nav_sections"></span></button><button class="nav-item" id="meetings-btn"><i class="fas fa-lock"></i><div class="live-indicator-wrapper"><span class="live-dot"></span><span class="live-text" data-key="nav_meetings_live"></span></div><span data-key="nav_meetings"></span></button><button class="nav-item" data-action="showContent" data-type="lectures"><i class="fas fa-chalkboard-teacher"></i><span data-key="nav_lectures"></span></button><button class="nav-item" id="courses-btn"><i id="courses-icon" class="fas fa-lock"></i><span data-key="nav_courses"></span></button><button class="nav-item" data-modal="opinions-modal"><i class="fas fa-comments"></i><span data-key="nav_opinions"></span></button><button class="nav-item" data-modal="about-modal"><i class="fas fa-info-circle"></i><span data-key="nav_about"></span></button><button class="nav-item" data-modal="settings-modal"><i class="fas fa-sliders-h"></i><span data-key="nav_settings"></span></button></div></nav></div>
-
-    <div id="admin-panel" class="page"><div class="admin-container"><aside class="admin-sidebar"><h1 id="admin-site-name-header"></h1><ul class="admin-nav"><li class="admin-nav-item"><a href="#" class="admin-nav-link active" data-view="dashboard"><i class="fas fa-tachometer-alt"></i><span>لوحة المعلومات</span></a></li><li class="admin-nav-item"><a href="#" class="admin-nav-link" data-view="students"><i class="fas fa-users"></i><span>إدارة الطلاب</span></a></li><li class="admin-nav-item"><a href="#" class="admin-nav-link" data-view="content-lectures"><i class="fas fa-chalkboard-teacher"></i><span>إدارة المحاضرات</span></a></li><li class="admin-nav-item"><a href="#" class="admin-nav-link" data-view="content-pdfs"><i class="fas fa-file-pdf"></i><span>إدارة الكتب</span></a></li><li class="admin-nav-item"><a href="#" class="admin-nav-link" data-view="content-sections"><i class="fas fa-users-cog"></i><span>إدارة السكاشن</span></a></li><li class="admin-nav-item"><a href="#" class="admin-nav-link" data-view="opinions"><i class="fas fa-comments"></i><span>إدارة الآراء</span></a></li><li class="admin-nav-item"><a href="#" class="admin-nav-link" data-view="ratings"><i class="fas fa-star-half-alt"></i><span data-key="nav_ratings_admin"></span></a></li><li class="admin-nav-item"><a href="#" class="admin-nav-link" data-view="announcements"><i class="fas fa-bullhorn"></i><span data-key="nav_announcements"></span></a></li><li class="admin-nav-item"><a href="#" class="admin-nav-link" data-view="text-editor"><i class="fas fa-language"></i><span data-key="nav_text_editor"></span></a></li><li class="admin-nav-item"><a href="#" class="admin-nav-link" data-view="ai-tools"><i class="fas fa-robot"></i><span data-key="nav_ai_tools_admin"></span></a></li><li class="admin-nav-item"><a href="#" class="admin-nav-link" data-view="site-settings"><i class="fas fa-cogs"></i><span data-key="nav_site_settings"></span></a></li></ul><button id="admin-logout-btn" class="modal-action-btn" data-key="logout_btn"><i class="fas fa-sign-out-alt"></i></button></aside><main class="admin-main-content"><div id="admin-dashboard-view" class="admin-view active"><h2>لوحة المعلومات</h2><div class="stats-container"><div class="stat-card"><i class="fas fa-users icon"></i><div class="info"><h3>إجمالي الطلاب</h3><p id="student-count">0</p></div></div><div class="stat-card"><i class="fas fa-comment-dots icon"></i><div class="info"><h3>إجمالي الآراء</h3><p id="opinions-count">0</p></div></div><div class="stat-card"><i class="fas fa-book icon"></i><div class="info"><h3>إجمالي المواد</h3><p id="subjects-count">0</p></div></div><div class="stat-card"><i class="fas fa-star icon"></i><div class="info"><h3>الطالب الأكثر نشاطًا</h3><p id="top-student" style="font-size: 1.2rem; font-family: 'Cairo', sans-serif;">-</p></div></div></div><div style="margin-top: 30px;"><h3><i class="fas fa-users-slash" style="color:var(--accent-color)"></i> الطلاب النشطون حاليًا (آخر 5 دقائق)</h3><ul id="active-students-list"></ul></div></div><div id="admin-students-view" class="admin-view"><h2>إدارة الطلاب</h2><div id="admin-student-list" style="overflow-x: auto;"></div></div><div id="admin-content-lectures-view" class="admin-view"><h2>إدارة المحاضرات</h2><div class="content-view-container"></div></div><div id="admin-content-pdfs-view" class="admin-view"><h2>إدارة الكتب</h2><div class="content-view-container"></div></div><div id="admin-content-sections-view" class="admin-view"><h2>إدارة السكاشن</h2><div class="content-view-container"></div></div><div id="admin-opinions-view" class="admin-view"><h2>إدارة آراء الطلاب</h2><div id="admin-opinions-list"></div></div><div id="admin-ratings-view" class="admin-view"><h2>تقييمات الموقع</h2><div id="admin-ratings-list"></div></div><div id="admin-announcements-view" class="admin-view"><h2>إرسال إعلان للطلاب</h2><form id="announcement-form"><div class="input-group"><textarea id="announcement-textarea" placeholder=" " required style="height: 120px;"></textarea><label for="announcement-textarea">نص الإعلان</label></div><button type="submit" class="submit-btn" style="font-size: 1.1rem; padding: 12px; margin-top: 10px;">إرسال الإعلان</button></form><div style="margin-top: 20px;"><h4>الإعلان الحالي:</h4><p id="current-announcement" style="opacity: 0.8;">لا يوجد إعلان حالي.</p></div></div><div id="admin-text-editor-view" class="admin-view"><h2>إدارة نصوص الموقع (العربية)</h2><form id="text-editor-form"></form></div><div id="admin-ai-tools-view" class="admin-view"><h2>إدارة أدوات الذكاء الاصطناعي</h2><div id="admin-ai-tools-list" class="details-view-list" style="margin-bottom: 20px;"></div><form id="add-ai-tool-form" class="content-management-form" style="flex-direction:column; gap: 15px; margin-top: 15px;"><h4>إضافة أداة جديدة</h4><div class="input-group"><input type="text" id="new-ai-tool-name" placeholder=" " required><label>اسم الأداة</label></div><div class="input-group"><input type="url" id="new-ai-tool-url" placeholder=" " required><label>رابط الأداة</label></div><button type="submit" class="submit-btn" style="font-size: 1rem; padding: 10px; margin-top: 0;">إضافة أداة</button></form></div><div id="admin-site-settings-view" class="admin-view"><h2>إعدادات الموقع</h2><form id="site-settings-form"><div class="input-group"><input type="text" id="setting-site-name" placeholder=" " required><label for="setting-site-name">اسم الموقع</label></div><hr style="border-color: var(--border-color); margin: 20px 0;"><div class="setting-toggle-container"><label for="setting-courses-unlocked">تفعيل قسم الكورسات للجميع (تجاوز النقاط)</label><label class="toggle-switch"><input type="checkbox" id="setting-courses-unlocked"><span class="slider"></span></label></div><div class="setting-toggle-container"><label for="setting-meetings-unlocked">تفعيل قسم الميتنج</label><label class="toggle-switch"><input type="checkbox" id="setting-meetings-unlocked"><span class="slider"></span></label></div><div class="input-group" id="meeting-url-container" style="display: none;"><input type="url" id="setting-meeting-url" placeholder=" "><label for="setting-meeting-url">رابط الميتنج (Zoom, etc.)</label></div><hr style="border-color: var(--border-color); margin: 20px 0;"><div class="input-group"><input type="number" id="setting-points-unlock" placeholder=" " required><label for="setting-points-unlock">النقاط المطلوبة لفتح الكورسات</label></div><div class="input-group"><input type="number" id="setting-points-lecture" placeholder=" " required><label for="setting-points-lecture">النقاط لكل محاضرة</label></div><div class="input-group"><textarea id="setting-banner-text" placeholder=" " style="height: 80px;"></textarea><label for="setting-banner-text">نص البانر المتحرك</label></div><button type="submit" class="submit-btn" style="font-size: 1.1rem; padding: 12px; margin-top: 10px;">حفظ الإعدادات</button></form></div></main></div></div>
+    <div id="main-page" class="page">
+        <div class="scrolling-banner">
+            <p></p>
+        </div>
+        <header id="main-header">
+            <div id="timer-live-indicator"></div>
+            <p id="timer-live-text" data-key="timer_live_text">جارٍ الآن</p>
+            <div id="points-counter">
+                <i class="fas fa-star"></i>
+                <span id="points-display">0</span>
+            </div>
+            <div class="header-content">
+                <p id="welcome-message-name"></p>
+                <p id="welcome-message-details"></p>
+            </div>
+            <img src="https://i.postimg.cc/gjS04rJw/IMG-20250414-WA0047.jpg" alt="App Logo" id="app-logo">
+        </header>
+        <div id="view-wrapper">
+            <div id="courses-container"></div>
+            <div id="details-view">
+                <div id="details-header"><button id="back-to-courses-btn" title="Back"><i class="fas fa-arrow-right"></button><h3 id="details-view-title"></h3></div>
+                <div id="details-view-list"></div>
+            </div>
+        </div>
+        <nav id="bottom-nav">
+            <div class="nav-group">
+                <button class="nav-item" id="platform-btn"><i class="fas fa-university"></i><span data-key="nav_platform">المنصة</span></button>
+                <button class="nav-item" id="courses-btn"><i id="courses-icon" class="fas fa-lock"></i><span data-key="nav_courses">كورسات</span></button>
+                <button class="nav-item" data-modal="opinions-modal"><i class="fas fa-comments"></i><span data-key="nav_opinions">آراء الطلاب</span></button>
+                <button class="nav-item" data-modal="about-modal"><i class="fas fa-info-circle"></i><span data-key="nav_about">عنا</span></button>
+                <button class="nav-item" data-modal="settings-modal"><i class="fas fa-sliders-h"></i><span data-key="nav_settings">الإعدادات</span></button>
+            </div>
+        </nav>
+        <div class="footer-copyright">
+            جميع الحقوق محفوظة AmrLotfy 2025
+        </div>
+    </div>
+    <div id="admin-panel" class="page">
+        <div class="admin-container">
+            <aside class="admin-sidebar">
+                <h1 id="admin-site-name-header">Mora Admin</h1>
+                <ul class="admin-nav">
+                    <li class="admin-nav-item"><a href="#" class="admin-nav-link active" data-view="dashboard"><i class="fas fa-tachometer-alt"></i><span>لوحة المعلومات</span></a></li>
+                    <li class="admin-nav-item"><a href="#" class="admin-nav-link" data-view="students"><i class="fas fa-users"></i><span>إدارة الطلاب</span></a></li>
+                    <li class="admin-nav-item"><a href="#" class="admin-nav-link" data-view="content-lectures"><i class="fas fa-chalkboard-teacher"></i><span>إدارة المحاضرات</span></a></li>
+                    <li class="admin-nav-item"><a href="#" class="admin-nav-link" data-view="content-pdfs"><i class="fas fa-book-open"></i><span>إدارة الكتب</span></a></li>
+                    <li class="admin-nav-item"><a href="#" class="admin-nav-link" data-view="content-sections"><i class="fas fa-users-cog"></i><span>إدارة السكاشن</span></a></li>
+                    <li class="admin-nav-item"><a href="#" class="admin-nav-link" data-view="opinions"><i class="fas fa-comments"></i><span>إدارة الآراء</span></a></li>
+                    <li class="admin-nav-item"><a href="#" class="admin-nav-link" data-view="ratings"><i class="fas fa-star-half-alt"></i><span data-key="nav_ratings_admin">تقييمات الموقع</span></a></li>
+                    <li class="admin-nav-item"><a href="#" class="admin-nav-link" data-view="announcements"><i class="fas fa-bullhorn"></i><span data-key="nav_announcements">الإعلانات</span></a></li>
+                    <li class="admin-nav-item"><a href="#" class="admin-nav-link" data-view="text-editor"><i class="fas fa-language"></i><span data-key="nav_text_editor">إدارة نصوص الموقع</span></a></li>
+                    <li class="admin-nav-item"><a href="#" class="admin-nav-link" data-view="ai-tools"><i class="fas fa-robot"></i><span data-key="nav_ai_tools_admin">إدارة أدوات AI</span></a></li>
+                    <li class="admin-nav-item"><a href="#" class="admin-nav-link" data-view="site-settings"><i class="fas fa-cogs"></i><span data-key="nav_site_settings">إعدادات الموقع</span></a></li>
+                </ul>
+                <button id="admin-logout-btn" class="modal-action-btn" data-key="logout_btn"><i class="fas fa-sign-out-alt"></i> تسجيل الخروج</button>
+            </aside>
+            <main class="admin-main-content">
+                <div id="admin-dashboard-view" class="admin-view active">
+                    <h2>لوحة المعلومات</h2>
+                    <div class="stats-container">
+                        <div class="stat-card">
+                            <i class="fas fa-users icon"></i>
+                            <div class="info">
+                                <h3>إجمالي الطلاب</h3>
+                                <p id="student-count">0</p>
+                            </div>
+                        </div>
+                         <div class="stat-card">
+                            <i class="fas fa-comment-dots icon"></i>
+                            <div class="info">
+                                <h3>إجمالي الآراء</h3>
+                                <p id="opinions-count">0</p>
+                            </div>
+                        </div>
+                         <div class="stat-card">
+                            <i class="fas fa-book icon"></i>
+                            <div class="info">
+                                <h3>إجمالي المواد</h3>
+                                <p id="subjects-count">0</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <i class="fas fa-star icon"></i>
+                            <div class="info">
+                                <h3>الطالب الأكثر نشاطًا</h3>
+                                <p id="top-student" style="font-size: 1.2rem; font-family: 'Cairo', sans-serif;">-</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="margin-top: 30px;">
+                        <h3><i class="fas fa-users-slash" style="color:var(--accent-color)"></i> الطلاب النشطون حاليًا (آخر 5 دقائق)</h3>
+                        <ul id="active-students-list"></ul>
+                    </div>
+                </div>
+                <div id="admin-students-view" class="admin-view">
+                    <h2>إدارة الطلاب</h2>
+                    <div id="admin-student-list" style="overflow-x: auto;"></div>
+                </div>
+                <div id="admin-content-lectures-view" class="admin-view">
+                    <h2>إدارة المحاضرات</h2>
+                    <div class="content-view-container"></div>
+                </div>
+                <div id="admin-content-pdfs-view" class="admin-view">
+                    <h2>إدارة الكتب</h2>
+                    <div class="content-view-container"></div>
+                </div>
+                <div id="admin-content-sections-view" class="admin-view">
+                    <h2>إدارة السكاشن</h2>
+                    <div class="content-view-container"></div>
+                </div>
+                <div id="admin-opinions-view" class="admin-view">
+                    <h2>إدارة آراء الطلاب</h2>
+                    <div id="admin-opinions-list"></div>
+                </div>
+                <div id="admin-ratings-view" class="admin-view">
+                     <h2>تقييمات الموقع</h2>
+                     <div id="admin-ratings-list"></div>
+                </div>
+                
+                <div id="admin-announcements-view" class="admin-view">
+                    <h2>إرسال إعلان للطلاب</h2>
+                    <form id="announcement-form">
+                        <div class="input-group">
+                            <textarea id="announcement-textarea" placeholder=" " required style="height: 120px;"></textarea>
+                            <label for="announcement-textarea">نص الإعلان</label>
+                        </div>
+                        <button type="submit" class="submit-btn" style="font-size: 1.1rem; padding: 12px; margin-top: 10px;">إرسال الإعلان</button>
+                    </form>
+                    <div style="margin-top: 20px;">
+                        <h4>الإعلان الحالي:</h4>
+                        <p id="current-announcement" style="opacity: 0.8;">لا يوجد إعلان حالي.</p>
+                    </div>
+                </div>
+                 <div id="admin-text-editor-view" class="admin-view">
+                     <h2>إدارة نصوص الموقع (العربية)</h2>
+                     <form id="text-editor-form"></form>
+                 </div>
+                 
+                 <div id="admin-ai-tools-view" class="admin-view">
+                     <h2>إدارة أدوات الذكاء الاصطناعي</h2>
+                     <div id="admin-ai-tools-list" class="details-view-list" style="margin-bottom: 20px;"></div>
+                     <form id="add-ai-tool-form" class="content-management-form" style="flex-direction:column; gap: 15px; margin-top: 15px;">
+                         <h4>إضافة أداة جديدة</h4>
+                         <div class="input-group"><input type="text" id="new-ai-tool-name" placeholder=" " required><label>اسم الأداة</label></div>
+                         <div class="input-group"><input type="url" id="new-ai-tool-url" placeholder=" " required><label>رابط الأداة</label></div>
+                         <button type="submit" class="submit-btn" style="font-size: 1rem; padding: 10px; margin-top: 0;">إضافة أداة</button>
+                     </form>
+                 </div>
+                <div id="admin-site-settings-view" class="admin-view">
+                    <h2>إعدادات الموقع</h2>
+                    <form id="site-settings-form">
+                        <div class="input-group">
+                            <input type="text" id="setting-site-name" placeholder=" " required>
+                            <label for="setting-site-name">اسم الموقع</label>
+                        </div>
+                        <hr style="border-color: var(--border-color); margin: 20px 0;">
+                        <div class="setting-toggle-container">
+                            <label for="setting-courses-unlocked">تفعيل قسم الكورسات للجميع (تجاوز النقاط)</label>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="setting-courses-unlocked">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                         <div class="setting-toggle-container">
+                            <label for="setting-meetings-unlocked">تفعيل قسم الميتنج</label>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="setting-meetings-unlocked">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        <div class="input-group" id="meeting-url-container" style="display: none;">
+                            <input type="url" id="setting-meeting-url" placeholder=" ">
+                            <label for="setting-meeting-url">رابط الميتنج (Zoom, etc.)</label>
+                        </div>
+                        <hr style="border-color: var(--border-color); margin: 20px 0;">
+                        <div class="input-group">
+                            <input type="number" id="setting-points-unlock" placeholder=" " required>
+                            <label for="setting-points-unlock">النقاط المطلوبة لفتح الكورسات</label>
+                        </div>
+                        <div class="input-group">
+                            <input type="number" id="setting-points-lecture" placeholder=" " required>
+                            <label for="setting-points-lecture">النقاط لكل محاضرة</label>
+                        </div>
+                        <div class="input-group">
+                            <textarea id="setting-banner-text" placeholder=" " style="height: 80px;"></textarea>
+                            <label for="setting-banner-text">نص البانر المتحرك</label>
+                        </div>
+                        <button type="submit" class="submit-btn" style="font-size: 1.1rem; padding: 12px; margin-top: 10px;">حفظ الإعدادات</button>
+                    </form>
+                </div>
+            </main>
+        </div>
+    </div>
     
-    <div id="points-notification"></div>
-    <div id="settings-modal" class="modal-overlay"><div class="modal-content"><button class="close-btn">×</button><h3 data-key="settings_title"></h3><div class="settings-section"><h4 data-key="settings_theme"></h4><div id="theme-switcher"></div></div><div class="settings-section"><h4 data-key="settings_lang"></h4><div class="settings-options vertical-options" id="lang-switcher"><button class="settings-btn" data-lang="ar">العربية</button><button class="settings-btn" data-lang="en">English</button></div></div><div class="settings-section"><h4 data-key="settings_mode"></h4><div class="settings-options vertical-options" id="mode-switcher"><button class="settings-btn" data-mode="mode-dark" data-key="mode_dark"></button><button class="settings-btn" data-mode="mode-light" data-key="mode_light"></button><button class="settings-btn" data-mode="mode-oled" data-key="mode_oled"></button><button class="settings-btn" data-mode="mode-gold-black" data-key="mode_gold_black"></button></div></div></div></div>
-    <div id="privacy-modal" class="modal-overlay"><div class="modal-content"><button class="close-btn">×</button><h3 data-key="privacy_title"></h3><p data-key="privacy_content"></p></div></div>
-    <div id="about-modal" class="modal-overlay full-screen"><div class="modal-content"><button class="close-btn">×</button><h3 data-key="about_title"></h3><p class="institute-name" data-key="about_desc"></p><p class="dev-credit" data-key="about_dev"></p><div class="social-icons"><a href="https://www.instagram.com/eltopamr55?igsh=MWJ2MzJqaXBlZzRlaQ==" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a><a href="mailto:amrloutfy2006@gmail.com" title="Email"><i class="fas fa-envelope"></i></a><a href="https://wa.me/201067941806" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a></div><p class="app-version" data-key="app_version"></p><h4 class="sponsors-title" data-key="sponsors_title"></h4><ul class="sponsors-list glowing-sponsors"><li>أ. د/ عبدالمنعم الدسوقي</li><li>أ. د/ إبراهيم ماريه</li><li>أ. د/ مصطفى عبدالمنعم</li></ul><div class="modal-actions-list"><button id="rate-website-btn" class="modal-action-btn" data-modal="rating-modal" data-key="rate_website_btn"><i class="fas fa-star"></i></button><button id="blog-btn" class="modal-action-btn" data-modal="blog-modal" data-key="blog_btn" style="display: none;"><i class="fas fa-feather-alt"></i></button><button id="timer-btn" class="modal-action-btn" data-modal="timer-modal" data-key="timer_btn"><i class="fas fa-stopwatch"></i></button><button id="privacy-policy-btn" class="modal-action-btn" data-modal="privacy-modal" data-key="privacy_policy_btn"><i class="fas fa-shield-alt"></i></button><button id="logout-btn" class="modal-action-btn" data-key="logout_btn"><i class="fas fa-sign-out-alt"></i></button><button id="clear-data-btn" class="modal-action-btn" data-key="clear_data_btn"><i class="fas fa-trash-alt"></i></button></div></div></div>
-    <div id="ai-modal" class="modal-overlay full-screen"><div class="modal-content"><button class="close-btn">×</button><h3 data-key="ai_title"></h3><div class="ai-container"></div></div></div>
-    <div id="platform-links-modal" class="modal-overlay full-screen"><div class="modal-content"><button class="close-btn">×</button><h3 data-key="platform_title"></h3><div class="ai-container"><a href="https://tanta-services.online/TantaPortal/index.php" class="ai-btn" target="_blank">بوابة خدمات المعهد</a></div></div></div>
-    <div id="redirect-modal" class="modal-overlay full-screen"><div class="modal-content"><p class="dev-text" data-key="redirect_dev"></p><h3 class="redirect-message" data-key="redirect_msg"></h3><div id="redirect-timer">3</div></div></div>
-    <div id="rating-modal" class="modal-overlay"><div class="modal-content" style="text-align: center;"><button class="close-btn">×</button><h3 data-key="rating_title"></h3><div class="rating-stars"><i class="far fa-star" data-value="1"></i><i class="far fa-star" data-value="2"></i><i class="far fa-star" data-value="3"></i><i class="far fa-star" data-value="4"></i><i class="far fa-star" data-value="5"></i></div></div></div>
-    <div id="blog-modal" class="modal-overlay"><div class="modal-content"><button class="close-btn">×</button><h3 data-key="blog_title"></h3><textarea id="blog-textarea" placeholder="اكتب ملاحظاتك هنا..." maxlength="1000"></textarea><div class="blog-actions"><span id="char-counter">0 / 1000</span><button id="save-blog-btn" data-key="blog_save_btn"></button></div></div></div>
-    <div id="timer-modal" class="modal-overlay"><div class="modal-content"><button class="close-btn">×</button><div id="timer-container"><h3 data-key="timer_title_pomodoro"></h3><div id="pomodoro-info"><p id="pomodoro-mode" data-key="pomodoro_mode_work"></p><p id="pomodoro-cycles" data-key="pomodoro_cycles"></p></div><div id="timer-display">25:00</div><p id="pomodoro-desc" data-key="pomodoro_desc"></p><div id="timer-controls"><button id="start-pause-timer-btn" data-key="timer_start_btn"></button><button id="reset-timer-btn" data-key="timer_reset_btn"></button></div></div></div></div>
-    <div id="courses-locked-modal" class="modal-overlay full-screen"><div class="modal-content"><button class="close-btn">×</button><p id="courses-locked-message" data-key="courses_locked_msg"></p><p class="dev-credit-modal" data-key="dev_credit_text"></p></div></div>
+    <div id="points-notification">+9 نقاط</div>
+    <div id="settings-modal" class="modal-overlay"><div class="modal-content"><button class="close-btn">×</button><h3 data-key="settings_title">الإعدادات</h3><div class="settings-section"><h4 data-key="settings_theme">الثيم اللوني</h4><div id="theme-switcher"></div></div><div class="settings-section"><h4 data-key="settings_lang">اللغة</h4><div class="settings-options vertical-options" id="lang-switcher"><button class="settings-btn" data-lang="ar">العربية</button><button class="settings-btn" data-lang="en">English</button></div></div><div class="settings-section"><h4 data-key="settings_mode">الوضع</h4><div class="settings-options vertical-options" id="mode-switcher"><button class="settings-btn" data-mode="mode-dark" data-key="mode_dark">داكن</button><button class="settings-btn" data-mode="mode-light" data-key="mode_light">فاتح</button><button class="settings-btn" data-mode="mode-oled" data-key="mode_oled">ليلي</button><button class="settings-btn" data-mode="mode-gold-black" data-key="mode_gold_black">ذهبي</button></div></div></div></div>
+    <div id="privacy-modal" class="modal-overlay"><div class="modal-content"><button class="close-btn">×</button><h3 data-key="privacy_title">سياسة الخصوصية</h3><p data-key="privacy_content"></p></div></div>
+    <div id="about-modal" class="modal-overlay full-screen">
+        <div class="modal-content">
+            <button class="close-btn">×</button>
+            <h3 data-key="about_title">Mora for Studying</h3>
+            <div class="institute-image-container">
+                <img src="https://i.postimg.cc/gjS04rJw/IMG-20250414-WA0047.jpg" alt="معهد طنطا" class="institute-image">
+            </div>
+            <p class="institute-name" data-key="about_desc"></p>
+            <div class="app-info-section">
+                <p><strong>الإصدار:</strong> 11.0</p>
+                <p><strong>رقم المتسلسل:</strong> MOR-2025-001</p>
+                <p>تم تصميم هذا الموقع لتقديم أفضل تجربة تعليمية للطلاب، حيث يجمع بين البساطة والاحترافية لتسهيل الوصول إلى المحاضرات والسكاشن والكتب والمزيد.</p>
+            </div>
+            <p class="dev-credit" data-key="about_dev"></p>
+            <div class="social-icons">
+                <a href="https://www.instagram.com/eltopamr55?igsh=MWJ2MzJqaXBlZzRlaQ==" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="mailto:amrloutfy2006@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
+                <a href="https://wa.me/201067941806" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            </div>
+            <p class="app-version" data-key="app_version"></p>
+            <h4 class="sponsors-title" data-key="sponsors_title">تحت رعاية</h4>
+            <ul class="sponsors-list glowing-sponsors">
+                <li>أ. د/ عبدالمنعم الدسوقي</li>
+                <li>أ. د/ إبراهيم ماريه</li>
+                <li>أ. د/ مصطفى عبدالمنعم</li>
+            </ul>
+            <div class="modal-actions-list">
+                <button id="rate-website-btn" class="modal-action-btn" data-modal="rating-modal" data-key="rate_website_btn"><i class="fas fa-star"></i> قيم الموقع</button>
+                <button id="blog-btn" class="modal-action-btn" data-modal="blog-modal" data-key="blog_btn" style="display: none;"><i class="fas fa-feather-alt"></i> مدونتي</button>
+                <button id="timer-btn" class="modal-action-btn" data-modal="timer-modal" data-key="timer_btn"><i class="fas fa-stopwatch"></i> تايمر</button>
+                <button id="privacy-policy-btn" class="modal-action-btn" data-modal="privacy-modal" data-key="privacy_policy_btn"><i class="fas fa-shield-alt"></i> سياسة الخصوصية</button>
+                <button id="logout-btn" class="modal-action-btn" data-key="logout_btn"><i class="fas fa-sign-out-alt"></i> تسجيل الخروج</button>
+                <button id="clear-data-btn" class="modal-action-btn" data-key="clear_data_btn"><i class="fas fa-trash-alt"></i> محو البيانات</button>
+            </div>
+        </div>
+    </div>
+    <div id="ai-modal" class="modal-overlay full-screen"><div class="modal-content"><button class="close-btn">×</button><h3 data-key="ai_title">اختر مساعدك الذكي</h3><div class="ai-container"></div></div></div>
+    <div id="platform-links-modal" class="modal-overlay full-screen"><div class="modal-content"><button class="close-btn">×</button><h3 data-key="platform_title">روابط المنصة التعليمية</h3><div class="ai-container"><a href="https://tanta-services.online/TantaPortal/index.php" class="ai-btn" target="_blank">بوابة خدمات المعهد</a></div></div></div>
+    <div id="redirect-modal" class="modal-overlay full-screen"><div class="modal-content"><p class="dev-text" data-key="redirect_dev">تم التطوير بواسطة Amr Lotfy</p><h3 class="redirect-message" data-key="redirect_msg">...جاري تحويلك الآن</h3><div id="redirect-timer">3</div></div></div>
+    <div id="rating-modal" class="modal-overlay"><div class="modal-content" style="text-align: center;"><button class="close-btn">×</button><h3 data-key="rating_title">قيم تجربتك</h3><div class="rating-stars"><i class="far fa-star" data-value="1"></i><i class="far fa-star" data-value="2"></i><i class="far fa-star" data-value="3"></i><i class="far fa-star" data-value="4"></i><i class="far fa-star" data-value="5"></i></div></div></div>
+    <div id="blog-modal" class="modal-overlay"><div class="modal-content"><button class="close-btn">×</button><h3 data-key="blog_title">مدونتي الشخصية</h3><textarea id="blog-textarea" placeholder="اكتب ملاحظاتك هنا..." maxlength="1000"></textarea><div class="blog-actions"><span id="char-counter">0 / 1000</span><button id="save-blog-btn" data-key="blog_save_btn">حفظ</button></div></div></div>
+    
+    <div id="timer-modal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="close-btn">×</button>
+            <div id="timer-container">
+                <h3 data-key="timer_title_pomodoro">تايمر التركيز</h3>
+                <div id="pomodoro-info">
+                    <p id="pomodoro-mode" data-key="pomodoro_mode_work">جلسة تركيز</p>
+                    <p id="pomodoro-cycles" data-key="pomodoro_cycles">الجولة: 1 / 4</p>
+                </div>
+                <div id="timer-display">25:00</div>
+                <p id="pomodoro-desc" data-key="pomodoro_desc"></p>
+                <div id="timer-controls">
+                    <button id="start-pause-timer-btn" data-key="timer_start_btn">بدء</button>
+                    <button id="reset-timer-btn" data-key="timer_reset_btn">إعادة ضبط</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="courses-locked-modal" class="modal-overlay full-screen"><div class="modal-content"><button class="close-btn">×</button><p id="courses-locked-message" data-key="courses_locked_msg"></p><p class="dev-credit-modal" data-key="dev_credit_text">تطوير: Amr Lotfy</p></div></div>
     <div id="lecture-content-modal" class="modal-overlay full-screen"><div class="modal-content"><button class="close-btn">×</button><div id="lecture-content"></div></div></div>
     <div id="video-player-modal" class="modal-overlay"><div class="modal-content"><button class="close-btn">×</button><div id="video-player-container"></div></div></div>
-    <div id="meetings-locked-modal" class="modal-overlay full-screen"><div class="modal-content"><button class="close-btn">×</button><p class="meetings-locked-main-text" data-key="meetings_locked_main"></p><p class="meetings-locked-sub-text" data-key="meetings_locked_sub"></p><p class="dev-credit-modal" data-key="dev_credit_text"></p></div></div>
-    <div id="opinions-modal" class="modal-overlay full-screen"><div class="modal-content"><button class="close-btn">×</button><h3 data-key="opinions_title"></h3><div id="opinions-list"></div><div id="opinion-form-container"><form id="opinion-form"><textarea id="opinion-textarea" placeholder="اكتب رأيك هنا..." maxlength="300" required></textarea><button type="submit" id="submit-opinion-btn" data-key="opinion_submit_btn"></button></form></div></div></div>
-    <div id="content-editor-modal" class="modal-overlay"><div class="modal-content"><button class="close-btn">×</button><h3 id="content-editor-title"></h3><div id="content-editor-content"></div></div></div>
-    <div id="announcement-toast" class="modal-overlay"><div class="modal-content" style="max-width: 450px; text-align: center;"><button class="close-btn">&times;</button><h3><i class="fas fa-bullhorn" style="color: var(--accent-color); margin-left: 10px;"></i>إعلان هام</h3><p id="announcement-text" style="margin-top: 20px; line-height: 1.8;"></p></div></div>
-    <div id="points-info-toast"><button class="close-toast-btn">&times;</button><div id="points-info-toast-content"></div></div>
+    
+    <div id="meetings-locked-modal" class="modal-overlay full-screen">
+        <div class="modal-content">
+            <button class="close-btn">×</button>
+            <p class="meetings-locked-main-text" data-key="meetings_locked_main"></p>
+            <p class="meetings-locked-sub-text" data-key="meetings_locked_sub"></p>
+            <p class="dev-credit-modal" data-key="dev_credit_text"></p>
+        </div>
+    </div>
+    
+    <div id="opinions-modal" class="modal-overlay full-screen">
+        <div class="modal-content">
+            <button class="close-btn">×</button>
+            <h3 data-key="opinions_title">آراء الطلاب</h3>
+            <div id="opinions-list">
+                </div>
+            <div id="opinion-form-container">
+                <form id="opinion-form">
+                    <textarea id="opinion-textarea" placeholder="اكتب رأيك هنا..." maxlength="300" required></textarea>
+                    <button type="submit" id="submit-opinion-btn" data-key="opinion_submit_btn">نشر الرأي</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div id="content-editor-modal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="close-btn">×</button>
+            <h3 id="content-editor-title">إدارة محتوى: </h3>
+            <div id="content-editor-content"></div>
+        </div>
+    </div>
+    <div id="announcement-toast" class="modal-overlay">
+        <div class="modal-content" style="max-width: 450px; text-align: center;">
+            <button class="close-btn">&times;</button>
+            <h3><i class="fas fa-bullhorn" style="color: var(--accent-color); margin-left: 10px;"></i>إعلان هام</h3>
+            <p id="announcement-text" style="margin-top: 20px; line-height: 1.8;"></p>
+        </div>
+    </div>
+    <div id="points-info-toast">
+        <button class="close-toast-btn">&times;</button>
+        <div id="points-info-toast-content"></div>
+    </div>
     <div id="pointing-arrow"></div>
-
-    <script src="script.js"></script>
+    <script>
+        // سيتم لصق كود JavaScript هنا لاحقًا
+    </script>
 </body>
 </html>
